@@ -6,32 +6,60 @@
 
 @layer components {
 	.button {
-		@apply cursor-pointer rounded-full bg-bgAccentDark/20 px-3
+		@apply flex cursor-pointer rounded-full bg-bgAccentDark/20 px-3
     py-2 text-bgAccentDark outline-none transition duration-300
 	ease-in-out dark:bg-bgAccentLight/20 dark:text-bgAccentLight;
 	}
 	.primary-button {
-		@apply cursor-pointer rounded-full px-3 py-2
-    text-bgAccentDark outline-none transition duration-300 ease-in-out hover:bg-bgAccentDark/10 
+		@apply flex cursor-pointer rounded-full px-3 py-2
+    text-bgAccentDark outline-none transition duration-300 ease-in-out hover:bg-bgAccentDark/10
     dark:text-bgAccentLight dark:hover:bg-bgAccentLight/10 dark:hover:text-bgAccentLight;
 	}
+	.secondary-button {
+		@apply flex cursor-pointer rounded-full border-2 border-bgAccentDark
+	bg-bgAccentLight px-3 py-2 text-bgAccentDark
+	outline-none transition duration-300 ease-in-out hover:bg-bgAccentDark/10
+	dark:border-bgAccentLight dark:bg-bgAccentDark dark:text-bgAccentLight
+	dark:hover:bg-bgAccentLight/10 dark:hover:text-bgAccentLight;
+	}
+	.text-area {
+		@apply resize-none rounded-md bg-bgAccentDark/10 p-4 py-2
+		text-bgAccentDark placeholder-bgAccentDark/50 outline-none ring-bgAccentDark/60 transition
+		duration-300 ease-in-out focus:ring-2 dark:bg-bgAccentLight/10
+		dark:text-bgAccentLight dark:placeholder-bgAccentLight/50 dark:ring-bgAccentLight/60;
+	}
 	.select-button {
-		@apply rounded-full bg-bgAccentLight px-3 py-2 
-    text-bgAccentDark outline-none ring-bgAccentDark 
-	 transition duration-300 ease-in-out hover:bg-bgAccentDark hover:bg-bgAccentDark/10 hover:ring-2
-	 dark:bg-bgAccentDark 
-    dark:text-bgAccentLight dark:ring-bgAccentLight dark:hover:bg-bgAccentLight/10;
+		@apply p-2 text-xs outline-none transition-all duration-300 ease-in-out dark:border-bgAccentLight lg:text-lg;
+	}
+	.select-button-hover {
+		@apply border-4 border-bgAccentDark hover:bg-bgAccentDark/20 hover:shadow-md dark:border-bgAccentLight dark:hover:bg-bgAccentLight/20;
 	}
 	.select-button-active {
+		@apply border-4 border-bgAccentDark bg-bgAccentDark text-bgAccentLight shadow-md
+		dark:border-bgAccentLight dark:bg-bgAccentLight dark:text-bgAccentDark;
+	}
+	.select-menu {
+		@apply flex cursor-pointer rounded-full bg-bgAccentLight px-3 py-2 text-bgAccentDark outline-none
+		ring-bgAccentDark hover:bg-bgAccentDark hover:bg-bgAccentDark/10 hover:ring-2
+	 dark:bg-bgAccentDark dark:text-bgAccentLight dark:ring-bgAccentLight dark:hover:bg-bgAccentLight/10;
+	}
+	.select-menu-active {
 		@apply bg-bgAccentDark/10 ring-2 ring-bgAccentDark dark:bg-bgAccentLight/10 dark:ring-bgAccentLight;
 	}
 	.primary-input {
-		@apply rounded-full bg-bgAccentDark/10 
-    bg-bgAccentLight px-4 py-2 text-bgAccentDark placeholder-bgAccentDark/50 outline-none ring-bgAccentDark/60 transition
-    duration-300 ease-in-out focus:ring-2
-	dark:bg-bgAccentDark dark:bg-bgAccentLight/10 dark:text-bgAccentLight dark:placeholder-bgAccentLight/50 dark:ring-bgAccentLight/60;
+		@apply flex rounded-full bg-bgAccentDark/10
+	px-3 py-2 text-bgAccentDark placeholder-bgAccentDark/50 outline-none ring-bgAccentDark/60 transition
+    duration-300 ease-in-out focus:ring-2 dark:bg-bgAccentLight/10
+	dark:text-bgAccentLight dark:placeholder-bgAccentLight/50 dark:ring-bgAccentLight/60;
 	}
 	.error-input {
-		@apply ring-2 ring-red-600;
+		@apply ring-2 ring-red-600 dark:ring-red-400;
+	}
+	.header-item {
+		@apply flex cursor-pointer items-center
+		justify-center py-5 text-lg font-medium focus:z-20 lg:text-lg;
+	}
+	.error-text {
+		@apply text-red-600 dark:text-red-400;
 	}
 }

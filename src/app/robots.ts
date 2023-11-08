@@ -7,8 +7,8 @@ export default function robots(): MetadataRoute.Robots {
 		rules: {
 			userAgent: '*',
 			allow: '/',
-			disallow: '/private/',
+			disallow: ['/api', '/_next', '/static'],
 		},
-		sitemap: 'https://www.site.com/sitemap.xml',
+		sitemap: 'https://qwkcv.vercel.app/sitemap.xml',
 	};
 }
