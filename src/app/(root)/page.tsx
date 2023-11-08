@@ -1,16 +1,15 @@
 'use client';
 
+import base64url from 'base64url';
+
 import {
-	ArrowUpRightSquare,
-	Asterisk,
 	Book,
+	Briefcase,
 	Building2,
 	CalendarRange,
 	CaseSensitive,
-	CheckCheck,
 	ChevronDown,
 	ChevronUp,
-	Copy,
 	FileText,
 	Focus,
 	Github,
@@ -26,6 +25,7 @@ import {
 	School2,
 	Text,
 	Trash2,
+	User2,
 } from 'lucide-react';
 import React, { useState } from 'react';
 import {
@@ -135,41 +135,89 @@ const Home = () => {
 	};
 
 	const onSubmit: SubmitHandler<UserFormInput> = async (data) => {
-		console.log(
-			'🚀 ~ file: page.tsx:141 ~ constonSubmit:SubmitHandler<UserFormInput>= ~ data:',
-			data,
-		);
-
-		const encodedData = btoa(JSON.stringify(data));
-		console.log('Encoded JSON Data:', encodedData);
-		window.open(`/${encodedData}`, '_blank');
+		const encodedData = base64url.encode(JSON.stringify(data));
+		window.open(`/cv/${encodedData}`, '_blank');
 	};
 
 	return (
 		<form className='mx-auto h-full max-w-3xl flex-col items-center justify-center space-y-4'>
 			<div className='w-full space-y-6'>
-				<div className='flex w-full flex-col space-y-4'>
-					<input
-						className={`primary-input w-full text-xs lg:w-96
-								${errors.name && 'error-input'}
-								${loading && 'cursor-progress'}`}
-						type='text'
-						placeholder={errors.name ? 'Name Required' : 'Name'}
-						required
-						{...register('name', {
-							required: true,
-						})}
-					/>
-					<textarea
-						className={`text-area h-20 text-xs font-light
+				<div className='flex w-full flex-col space-y-6'>
+					<div className='flex flex-col items-center justify-between space-y-4 lg:flex-row lg:space-x-2 lg:space-y-0'>
+						<div className='flex w-full flex-col space-y-2'>
+							<span className='flex flex-row items-center space-x-2'>
+								<User2 size={16} />
+								<p
+									className={`w-full truncate text-ellipsis text-sm
+								${errors.name && 'error-text'}`}
+								>
+									{errors.name ? 'Name Required' : 'Name'}
+								</p>
+							</span>
+							<input
+								className={`primary-input w-full text-xs lg:w-72
+									${errors.name && 'error-input'}
+									${loading && 'cursor-progress'}`}
+								type='text'
+								placeholder={
+									errors.name ? 'Name Required' : 'Tem'
+								}
+								required
+								{...register('name', {
+									required: true,
+								})}
+							/>
+						</div>
+						<div className='flex w-full flex-col space-y-2'>
+							<span className='flex flex-row items-center space-x-2'>
+								<Briefcase size={16} />
+								<p
+									className={`w-full truncate text-ellipsis text-sm
+								${errors.jobTitle && 'error-text'}`}
+								>
+									{errors.jobTitle
+										? 'Job Title Required'
+										: 'Job Title'}
+								</p>
+							</span>
+							<input
+								className={`primary-input w-full text-xs lg:w-72
+									${errors.jobTitle && 'error-input'}
+									${loading && 'cursor-progress'}`}
+								type='text'
+								placeholder={
+									errors.jobTitle
+										? 'Job Title Required'
+										: 'Product Designer'
+								}
+								required
+								{...register('jobTitle', {
+									required: true,
+								})}
+							/>
+						</div>
+					</div>
+					<div className='flex w-full flex-col space-y-2'>
+						<span className='flex flex-row items-center space-x-2'>
+							<Text size={16} />
+							<p
+								className={`w-full truncate text-ellipsis text-sm
+							${errors.blurb && 'error-text'}`}
+							>
+								{errors.blurb ? 'Blurb Required' : 'Blurb'}
+							</p>
+						</span>
+						<textarea
+							className={`text-area h-20 text-xs font-light
 								${errors.blurb && 'error-input'}
 								${loading && 'cursor-progress'}
 								`}
-						placeholder='Blurb'
-						{...register('blurb', {
-							required: false,
-						})}
-					/>
+							placeholder='I am a Product Designer with 5 years of experience in the field. I have worked with companies like Google, Facebook, and Amazon.'
+							{...register('blurb', {
+								required: false,
+							})}
+						/>
+					</div>
 				</div>
 
 				{/* links */}

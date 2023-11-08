@@ -23,7 +23,7 @@ const Header = () => {
 						className='text-md inline-flex flex-col items-start justify-start font-semibold
 								tracking-tight transition duration-300 ease-in-out'
 					>
-						qwkcv
+						QwkCV
 					</p>
 				</Link>
 

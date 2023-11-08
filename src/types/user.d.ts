@@ -3,7 +3,7 @@ export type UserFormInput = {
 	photoURL?: string;
 	blurb?: string;
 	location: string;
-	imageURL?: string;
+	jobTitle: string;
 	resumeURL?: string;
 	email?: string;
 	linkedin?: string;

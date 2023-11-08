@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 import Header from '@/components/header';
 
 export const metadata = {
-	title: 'qwkcv | Create a digital CV in seconds',
+	title: 'QwkCV | Create a digital CV in seconds',
 	description: 'Description',
 	meta: {
 		viewport: 'width=device-width, initial-scale=1',

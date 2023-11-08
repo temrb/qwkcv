@@ -4,7 +4,6 @@ import React, { ReactNode } from 'react';
 import '../styles/globals.css';
 import { Poppins } from 'next/font/google';
 
-import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/react';
 
 const poppins = Poppins({
@@ -14,7 +13,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-	title: 'qwkcv',
+	title: 'QwkCV',
 	description: 'desc',
 	meta: {
 		viewport: 'width=device-width, initial-scale=1',
