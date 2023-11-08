@@ -1,0 +1,37 @@
+/** @format */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.button {
+		@apply cursor-pointer rounded-full bg-bgAccentDark/20 px-3
+    py-2 text-bgAccentDark outline-none transition duration-300
+	ease-in-out dark:bg-bgAccentLight/20 dark:text-bgAccentLight;
+	}
+	.primary-button {
+		@apply cursor-pointer rounded-full px-3 py-2
+    text-bgAccentDark outline-none transition duration-300 ease-in-out hover:bg-bgAccentDark/10 
+    dark:text-bgAccentLight dark:hover:bg-bgAccentLight/10 dark:hover:text-bgAccentLight;
+	}
+	.select-button {
+		@apply rounded-full bg-bgAccentLight px-3 py-2 
+    text-bgAccentDark outline-none ring-bgAccentDark 
+	 transition duration-300 ease-in-out hover:bg-bgAccentDark hover:bg-bgAccentDark/10 hover:ring-2
+	 dark:bg-bgAccentDark 
+    dark:text-bgAccentLight dark:ring-bgAccentLight dark:hover:bg-bgAccentLight/10;
+	}
+	.select-button-active {
+		@apply bg-bgAccentDark/10 ring-2 ring-bgAccentDark dark:bg-bgAccentLight/10 dark:ring-bgAccentLight;
+	}
+	.primary-input {
+		@apply rounded-full bg-bgAccentDark/10 
+    bg-bgAccentLight px-4 py-2 text-bgAccentDark placeholder-bgAccentDark/50 outline-none ring-bgAccentDark/60 transition
+    duration-300 ease-in-out focus:ring-2
+	dark:bg-bgAccentDark dark:bg-bgAccentLight/10 dark:text-bgAccentLight dark:placeholder-bgAccentLight/50 dark:ring-bgAccentLight/60;
+	}
+	.error-input {
+		@apply ring-2 ring-red-600;
+	}
+}
