@@ -1,3 +1,10 @@
+# QwkCV
+
+QwkCV is a simple, easy to use, and free CV portfolio builder.
+All data lives in the URL, so you can share your CV with anyone, anywhere, anytime.
+
+#
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

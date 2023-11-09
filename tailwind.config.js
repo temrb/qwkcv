@@ -17,5 +17,9 @@ module.exports = {
 			},
 		},
 	},
+	future: {
+		hoverOnlyWhenSupported: true,
+		purgeLayersByDefault: true,
+	},
 	plugins: [],
 };
