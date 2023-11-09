@@ -4,7 +4,6 @@ import base64url from 'base64url';
 
 import {
 	ArrowUpRightSquare,
-	Brush,
 	Building2,
 	CalendarRange,
 	CaseSensitive,
@@ -22,6 +21,7 @@ import {
 	Text,
 	Trash2,
 	User2,
+	Video,
 } from 'lucide-react';
 import React, { useState } from 'react';
 import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form';
@@ -52,6 +52,19 @@ const Home = () => {
 			linkedin: '',
 			company: '',
 			relationship: '',
+			link: '',
+			itemPosition: 0,
+		});
+	};
+
+	const linkArray = useFieldArray({
+		control,
+		name: 'block.linkBlock',
+	});
+
+	const handleAddLink = () => {
+		linkArray.append({
+			name: '',
 			link: '',
 			itemPosition: 0,
 		});
@@ -109,7 +122,7 @@ const Home = () => {
 					</div>
 				</div>
 
-				{/* links */}
+				{/* general links */}
 				<div className='grid items-center gap-4 space-y-4 px-2 lg:grid-cols-2 lg:space-y-0 lg:px-0'>
 					<div className='flex w-full flex-col space-y-2'>
 						<span className='flex flex-row items-center space-x-2'>
@@ -131,7 +144,7 @@ const Home = () => {
 							placeholder='https://...'
 							{...register('photoURL', {
 								pattern: {
-									value: /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/,
+									value: /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/,
 									message:
 										'Entered value does not match website format',
 								},
@@ -182,7 +195,7 @@ const Home = () => {
 							{...register('resumeURL', {
 								required: true,
 								pattern: {
-									value: /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/,
+									value: /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/,
 									message:
 										'Entered value does not match website format',
 								},
@@ -287,7 +300,7 @@ const Home = () => {
 							placeholder='Personal Website'
 							{...register('website', {
 								pattern: {
-									value: /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/,
+									value: /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/,
 									message:
 										'Entered value does not match website format',
 								},
@@ -421,7 +434,7 @@ const Home = () => {
 												{
 													required: false,
 													pattern: {
-														value: /^https?:\/\/(www\.)?[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]{2,3}(\/[a-zA-Z0-9_-]+)*\/?$/,
+														value: /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/,
 														message:
 															'Entered value does not match website format',
 													},
@@ -485,6 +498,139 @@ const Home = () => {
 								<p className='text-sm font-semibold'>Add</p>
 							</button>
 						</span>
+					</div>
+				</div>
+
+				{/* links */}
+				<div className='space-y-2'>
+					<div className='flex w-full flex-row items-center border-b-2 border-dotted border-bgAccentDark p-2 dark:border-bgAccentLight'>
+						<h1 className='text-sm font-semibold lg:text-lg'>
+							Links
+						</h1>
+					</div>
+					<div className='flex flex-col space-y-7 pt-2'>
+						{linkArray.fields.map((item, index) => (
+							<div
+								key={item.id}
+								className='flex w-full space-x-4'
+							>
+								<div className='grid w-full grid-cols-2 items-center gap-2 space-y-2'>
+									<span className='flex flex-row items-center space-x-2 font-light'>
+										<CaseSensitive size={18} />
+										<input
+											className={`primary-input w-full text-xs lg:w-56
+											${errors.block?.linkBlock?.[index]?.name && 'error-input'}`}
+											type='text'
+											placeholder='Name'
+											{...register(
+												`block.linkBlock.${index}.name`,
+												{
+													required: true,
+												},
+											)}
+										/>
+									</span>
+									<span className='flex flex-row items-center space-x-2 font-light'>
+										<LinkIcon size={18} />
+										<input
+											className={`primary-input w-full text-xs lg:w-56
+											${errors.block?.linkBlock?.[index]?.link && 'error-input'}`}
+											type='url'
+											placeholder='Link'
+											{...register(
+												`block.linkBlock.${index}.link`,
+												{
+													required: true,
+													pattern: {
+														value: /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
+														message:
+															'Entered value does not match website format',
+													},
+												},
+											)}
+										/>
+									</span>
+								</div>
+								<div className='flex w-10 flex-col items-center justify-start space-y-4'>
+									<p className='h-fit w-full items-center rounded-full bg-bgAccentDark/30 p-2 text-center text-sm font-semibold dark:bg-bgAccentLight/30'>
+										{index + 1}
+									</p>
+								</div>
+							</div>
+						))}
+						<span className='flex w-full justify-center'>
+							<button
+								className='primary-button flex w-fit flex-row items-center space-x-2'
+								type='button'
+								onClick={handleAddLink}
+							>
+								<Plus size={14} />
+								<p className='text-sm font-semibold'>Add</p>
+							</button>
+						</span>
+					</div>
+				</div>
+
+				{/* assets */}
+				<div className='space-y-2'>
+					<div className='flex w-full flex-row items-center border-b-2 border-dotted border-bgAccentDark p-2 dark:border-bgAccentLight'>
+						<h1 className='text-sm font-semibold lg:text-lg'>
+							Assets
+						</h1>
+					</div>
+					<div className='grid items-center gap-4 space-y-4 px-2 pt-2 lg:grid-cols-2 lg:space-y-0 lg:px-0'>
+						<div className='flex w-full flex-col space-y-2'>
+							<span className='flex flex-row items-center space-x-2'>
+								<ImageIcon size={16} />
+								<p
+									className={`w-full truncate text-ellipsis text-sm
+							${errors?.assets?.photoURL && 'error-text'}`}
+								>
+									{errors?.assets?.photoURL
+										? 'Enter valid URL'
+										: 'Photo URL'}
+								</p>
+							</span>
+							<input
+								className={`primary-input w-full text-xs lg:w-72
+								${errors?.assets?.photoURL && 'error-input'}`}
+								type='text'
+								placeholder='https://...'
+								{...register('assets.photoURL', {
+									pattern: {
+										value: /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/,
+										message:
+											'Entered value does not match website format',
+									},
+								})}
+							/>
+						</div>
+						<div className='flex w-full flex-col space-y-2'>
+							<span className='flex flex-row items-center space-x-2'>
+								<Video size={16} />
+								<p
+									className={`w-full truncate text-ellipsis text-sm
+							${errors?.assets?.vimeoURL && 'error-text'}`}
+								>
+									{errors?.assets?.vimeoURL
+										? 'Enter valid URL'
+										: 'Vimeo Video URL'}
+								</p>
+							</span>
+							<input
+								className={`primary-input w-full text-xs lg:w-72
+								${errors?.assets?.vimeoURL && 'error-input'}`}
+								type='text'
+								placeholder='https://vimeo.com/867098346'
+								{...register('assets.vimeoURL', {
+									pattern: {
+										value: /^https?:\/\/(www\.)?vimeo\.com\/[0-9]+$/,
+										message:
+											'Entered value does not match website format',
+									},
+								})}
+							/>
+						</div>
 					</div>
 				</div>
 

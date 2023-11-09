@@ -13,26 +13,20 @@ type UserFormInput = {
 		openToRelocation?: boolean;
 		openToRemote?: boolean;
 	};
-	block: Blocks;
+	assets: {
+		photoURL?: string;
+		vimeoURL?: string;
+	};
+	block: Block;
 };
 
-type Blocks = {
+type Block = {
 	linkBlock?: {
-		title: string;
+		name: string;
 		link: string;
 		itemPosition: int;
 	}[];
-	imageBlock?: {
-		title: string;
-		imageURL: string;
-		itemPosition: int;
-	}[];
-	videoBlock?: {
-		title: string;
-		videoURL: string;
-		itemPosition: int;
-	}[];
-	referenceBlock: {
+	referenceBlock?: {
 		name: string;
 		linkedin: string;
 		relationship: string;
@@ -42,4 +36,4 @@ type Blocks = {
 	}[];
 };
 
-export type { UserFormInput, Blocks };
+export type { UserFormInput, Block };

@@ -48,10 +48,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const Page = async ({ params }: Props) => {
 	const data = params.data;
 	const jsonData = decodeData(data);
-	console.log(
-		'🚀 ~ file: page.tsx:49 ~ Page ~ jsonData:',
-		jsonData?.block?.referenceBlock,
-	);
+
+	function getVimeoVideoId(vimeoURL: string): string | null {
+		const regex = /(?:vimeo\.com\/(?:video\/)?)?(\d+)/;
+		const match = vimeoURL.match(regex);
+
+		return match ? match[1] : null;
+	}
+
+	const vimeoVideoId = getVimeoVideoId(jsonData?.assets?.vimeoURL || '');
 
 	if (jsonData) {
 		return (
@@ -62,8 +67,8 @@ const Page = async ({ params }: Props) => {
 							<Image
 								src={`${jsonData?.photoURL}`}
 								alt={`${jsonData?.name} avatar`}
-								width={100}
-								height={100}
+								width={90}
+								height={90}
 								className='rounded-full'
 							/>
 							{jsonData?.blurb && (
@@ -90,7 +95,7 @@ const Page = async ({ params }: Props) => {
 								</span>
 								{(jsonData?.options?.openToRelocation ||
 									jsonData?.options?.openToRemote) && (
-									<span className='flex w-2/3 items-center space-x-1'>
+									<span className='flex w-2/3 items-center justify-end space-x-1'>
 										<p className='text-xs italic tracking-wider lg:text-sm'>
 											Open to/
 										</p>
@@ -184,34 +189,57 @@ const Page = async ({ params }: Props) => {
 							)}
 						</div>
 						<div className='flex h-full w-full flex-col space-y-6 pt-6'>
-							{jsonData?.block?.referenceBlock?.length >= 1 && (
-								<CVBlock />
+							{jsonData?.block?.referenceBlock?.length !== 0 && (
+								<CVBlock
+									referenceBlock={
+										jsonData?.block?.referenceBlock
+									}
+								/>
+							)}
+							{jsonData?.block?.linkBlock?.length !== 0 && (
+								<CVBlock
+									linkBlock={jsonData?.block?.linkBlock}
+								/>
 							)}
 						</div>
-						<div
-							style={{
-								padding: '56.25% 0 0 0',
-								position: 'relative',
-							}}
-						>
-							<iframe
-								src='https://player.vimeo.com/video/867098346'
+						{vimeoVideoId && (
+							<div
 								style={{
-									position: 'absolute',
-									top: '0',
-									left: '0',
-									width: '100%',
-									height: '100%',
+									padding: '56.25% 0 0 0',
+									position: 'relative',
 								}}
-								allow='autoplay; fullscreen; picture-in-picture'
-							></iframe>
-						</div>
-						<Script
-							src='https://player.vimeo.com/api/player.js'
-							async
-						/>
+							>
+								<iframe
+									src={`https://player.vimeo.com/video/${vimeoVideoId}`}
+									style={{
+										position: 'absolute',
+										top: '0',
+										left: '0',
+										width: '100%',
+										height: '100%',
+									}}
+									allow='autoplay; fullscreen; picture-in-picture'
+								></iframe>
+							</div>
+						)}
+
+						{jsonData?.assets?.photoURL && (
+							<Image
+								src={`${jsonData?.assets?.photoURL}`}
+								alt={`${jsonData?.name} photo asset`}
+								sizes='100vw'
+								style={{
+									width: '100%',
+									height: 'auto',
+								}}
+								width={500}
+								height={500}
+								className='justify-center rounded-2xl shadow-md dark:shadow-none'
+							/>
+						)}
 					</div>
 				</div>
+				<Script src='https://player.vimeo.com/api/player.js' async />
 			</div>
 		);
 	} else {
