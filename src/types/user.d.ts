@@ -9,10 +9,6 @@ type UserFormInput = {
 	github?: string;
 	website?: string;
 	calendly?: string;
-	options: {
-		openToRelocation?: boolean;
-		openToRemote?: boolean;
-	};
 	assets: {
 		photoURL?: string;
 		vimeoURL?: string;

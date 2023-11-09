@@ -28,11 +28,6 @@ import { UserFormInput } from '@/types/user';
 import Link from 'next/link';
 
 const Home = () => {
-	const [options, setOptions] = useState({
-		openToRelocation: false,
-		openToRemote: false,
-	});
-
 	const [searchError, setSearchError] = useState({
 		error: false,
 		errorMessage: '',
@@ -110,11 +105,6 @@ const Home = () => {
 		const jsonData = decodeData(data);
 
 		if (jsonData) {
-			const blockOptions = {
-				openToRelocation: jsonData.options?.openToRelocation,
-				openToRemote: jsonData.options?.openToRemote,
-			};
-
 			setValue('name', jsonData.name || '');
 			setValue('blurb', jsonData.blurb);
 			setValue('photoURL', jsonData.photoURL);
@@ -141,14 +131,6 @@ const Home = () => {
 					itemPosition: index,
 				});
 			});
-
-			setOptions((prevOptions) => ({
-				openToRelocation:
-					blockOptions.openToRelocation ??
-					prevOptions.openToRelocation,
-				openToRemote:
-					blockOptions.openToRemote ?? prevOptions.openToRemote,
-			}));
 		}
 	};
 
@@ -741,67 +723,6 @@ const Home = () => {
 									})}
 								/>
 							</div>
-						</div>
-					</div>
-
-					{/* options */}
-					<div className='space-y-4'>
-						<div className='flex w-full flex-row items-center border-b-2 border-dotted border-bgAccentDark p-2 dark:border-bgAccentLight'>
-							<h1 className='text-sm font-semibold lg:text-lg'>
-								Options
-							</h1>
-						</div>
-
-						<div className='flex flex-col items-center justify-center space-x-0 space-y-4 px-2 lg:flex-row lg:space-x-4 lg:space-y-0'>
-							<button
-								type='button'
-								className={`select-button flex w-full flex-col rounded-2xl
-						${!options.openToRelocation ? 'select-button-hover' : 'select-button-active'}`}
-								onClick={() => {
-									setOptions({
-										...options,
-										openToRelocation:
-											!options.openToRelocation,
-									});
-									setValue(
-										'options.openToRelocation',
-										!options.openToRelocation,
-									);
-								}}
-							>
-								<h1 className='text-left text-lg font-semibold'>
-									{options.openToRelocation
-										? '✅ Relocate'
-										: '❌ Relocate'}
-								</h1>
-								<p className='text-left text-xs font-light'>
-									You are open to relocate to other cities.
-								</p>
-							</button>
-							<button
-								type='button'
-								className={`select-button flex w-full flex-col rounded-2xl
-						${!options.openToRemote ? 'select-button-hover' : 'select-button-active'}`}
-								onClick={() => {
-									setOptions({
-										...options,
-										openToRemote: !options.openToRemote,
-									});
-									setValue(
-										'options.openToRemote',
-										!options.openToRemote,
-									);
-								}}
-							>
-								<h1 className='text-left text-lg font-semibold'>
-									{options.openToRemote
-										? '✅ Remote'
-										: '❌ Remote'}
-								</h1>
-								<p className='text-left text-xs font-light'>
-									You are open to working remotely.
-								</p>
-							</button>
 						</div>
 					</div>
 				</div>
