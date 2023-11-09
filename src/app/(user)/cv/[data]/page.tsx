@@ -82,10 +82,7 @@ const Page = async ({ params }: Props) => {
 							</div>
 
 							{jsonData?.blurb && (
-								<p
-									className='h-20 w-full overflow-x-hidden overflow-y-scroll rounded-2xl rounded-bl-none bg-bgAccentDark/10 p-3
-								font-mono text-xs tracking-wide shadow-sm dark:bg-bgAccentLight/10 dark:shadow-none'
-								>
+								<p className='h-20 w-full overflow-x-hidden overflow-y-scroll text-xs font-light tracking-wide'>
 									{jsonData?.blurb}
 								</p>
 							)}
