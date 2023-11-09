@@ -14,7 +14,7 @@ const poppins = Poppins({
 
 export const metadata = {
 	title: 'QwkCV',
-	description: 'desc',
+	description: 'Eas',
 	meta: {
 		viewport: 'width=device-width, initial-scale=1',
 		charset: 'utf-8',

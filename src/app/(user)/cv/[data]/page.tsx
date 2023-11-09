@@ -88,39 +88,15 @@ const Page = async ({ params }: Props) => {
 							)}
 						</div>
 					)}
-					<div className='flex h-full w-full flex-col space-y-4 pb-6'>
-						<div className='flex h-full w-full flex-col items-start space-y-2 lg:flex-row lg:items-center lg:justify-between lg:space-x-4 lg:space-y-0'>
-							<h1 className='flex-1 truncate text-xl font-semibold tracking-tight lg:w-2/5 lg:text-2xl'>
+					<div className='flex h-full w-full flex-col space-y-4 pb-6 pt-2'>
+						<div className='flex h-full w-full flex-row items-center justify-between space-x-4'>
+							<h1 className='w-3/5 flex-1 truncate text-2xl font-semibold tracking-tight lg:text-3xl'>
 								{jsonData?.name}
 							</h1>
-							<div className='flex w-full flex-row space-x-2 lg:w-3/5'>
-								<span className='flex w-1/3 items-center space-x-1'>
-									<MapPin className='h-4 w-4' />
-									<p className=' w-full truncate text-xs tracking-wider lg:text-sm'>
-										{jsonData?.location}
-									</p>
-								</span>
-								{(jsonData?.options?.openToRelocation ||
-									jsonData?.options?.openToRemote) && (
-									<span className='flex w-2/3 items-center justify-end space-x-1'>
-										<p className='text-xs italic tracking-wider lg:text-sm'>
-											Open to/
-										</p>
-										{jsonData?.options
-											?.openToRelocation && (
-											<p className='p-1 text-xs font-semibold tracking-tight text-blue-800 dark:text-blue-400 lg:text-sm'>
-												Relocation
-											</p>
-										)}
 
-										{jsonData?.options?.openToRemote && (
-											<p className='p-1 text-xs font-semibold tracking-tight text-blue-800 dark:text-blue-400 lg:text-sm'>
-												Remote
-											</p>
-										)}
-									</span>
-								)}
-							</div>
+							<p className='flex w-2/5 items-center justify-end truncate text-xs tracking-wider lg:text-sm'>
+								{jsonData?.location}
+							</p>
 						</div>
 						<div className='flex w-full flex-row space-x-4 border-t-2 border-bgAccentDark/20 pt-4 dark:border-bgAccentLight/20'>
 							{jsonData?.email && (
