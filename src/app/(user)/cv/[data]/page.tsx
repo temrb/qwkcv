@@ -11,7 +11,6 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { UserFormInput } from '@/types/user';
 import base64url from 'base64url';
 import Script from 'next/script';
@@ -64,17 +63,28 @@ const Page = async ({ params }: Props) => {
 				<div className='flex h-fit flex-col items-start justify-start space-y-2 capitalize'>
 					{(jsonData?.photoURL || jsonData?.blurb) && (
 						<div className='flex h-full w-full flex-row items-center space-x-4'>
-							<Image
-								src={`${jsonData?.photoURL}`}
-								alt={`${jsonData?.name} avatar`}
-								width={90}
-								height={90}
-								className='rounded-full'
-							/>
+							<div className='relative h-16 w-20'>
+								<Image
+									src={`${jsonData?.photoURL}`}
+									alt={`${jsonData?.name} avatar`}
+									quality={50}
+									fill
+									style={{
+										objectFit: 'cover',
+										objectPosition: 'center',
+										borderRadius: '0.5rem',
+									}}
+									sizes='(min-width: 1024px) 100px,
+										(min-width: 768px) 75px,
+										50px'
+									loading='lazy'
+								/>
+							</div>
+
 							{jsonData?.blurb && (
 								<p
-									className='h-20 w-full overflow-x-hidden overflow-y-scroll rounded-2xl rounded-bl-none bg-bgAccentDark/20 p-3
-								font-mono text-xs italic tracking-wide shadow-md dark:bg-bgAccentLight/20 dark:shadow-none'
+									className='h-20 w-full overflow-x-hidden overflow-y-scroll rounded-2xl rounded-bl-none bg-bgAccentDark/10 p-3
+								font-mono text-xs tracking-wide shadow-sm dark:bg-bgAccentLight/10 dark:shadow-none'
 								>
 									{jsonData?.blurb}
 								</p>
@@ -228,6 +238,8 @@ const Page = async ({ params }: Props) => {
 								src={`${jsonData?.assets?.photoURL}`}
 								alt={`${jsonData?.name} photo asset`}
 								sizes='100vw'
+								loading='lazy'
+								quality={50}
 								style={{
 									width: '100%',
 									height: 'auto',

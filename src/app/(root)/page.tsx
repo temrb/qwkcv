@@ -433,7 +433,7 @@ const Home = () => {
 								placeholder=' https://calendly.com/.../...'
 								{...register('calendly', {
 									pattern: {
-										value: /^https?:\/\/(www\.)?calendly\.com\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/,
+										value: /^https?:\/\/(www\.)?calendly\.com\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+\/?$/,
 										message:
 											'Entered value does not match Calendly format',
 									},
