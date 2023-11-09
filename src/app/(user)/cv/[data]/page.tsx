@@ -90,11 +90,11 @@ const Page = async ({ params }: Props) => {
 					)}
 					<div className='flex h-full w-full flex-col space-y-4 pb-6 pt-2'>
 						<div className='flex h-full w-full flex-row items-center justify-between space-x-4'>
-							<h1 className='w-3/5 flex-1 truncate text-2xl font-semibold tracking-tight lg:text-3xl'>
+							<h1 className='w-4/5 flex-1 truncate text-2xl font-semibold tracking-tight lg:w-3/5 lg:text-3xl'>
 								{jsonData?.name}
 							</h1>
 
-							<p className='flex w-2/5 items-center justify-end truncate text-xs tracking-wider lg:text-sm'>
+							<p className='flex w-1/5 items-center justify-end truncate text-xs tracking-tight lg:w-2/5 lg:text-sm'>
 								{jsonData?.location}
 							</p>
 						</div>
