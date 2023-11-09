@@ -6,9 +6,9 @@
 
 @layer components {
 	.button {
-		@apply flex cursor-pointer rounded-full bg-bgAccentDark/20 px-3
+		@apply flex cursor-pointer rounded-full bg-bgAccentDark/10 px-3
     py-2 text-bgAccentDark outline-none transition duration-300
-	ease-in-out dark:bg-bgAccentLight/20 dark:text-bgAccentLight;
+	ease-in-out dark:bg-bgAccentLight/10 dark:text-bgAccentLight;
 	}
 	.primary-button {
 		@apply flex cursor-pointer rounded-full px-3 py-2
