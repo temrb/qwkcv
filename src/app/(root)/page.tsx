@@ -132,6 +132,22 @@ const Home = () => {
 					itemPosition: index,
 				});
 			});
+		} else {
+			setValue('name', '');
+			setValue('blurb', '');
+			setValue('photoURL', '');
+			setValue('location', '');
+			setValue('resumeURL', '');
+			setValue('email', '');
+			setValue('linkedin', '');
+			setValue('github', '');
+			setValue('website', '');
+			setValue('calendly', '');
+			setValue('assets.photoURL', '');
+			setValue('assets.vimeoURL', '');
+
+			referenceArray.remove();
+			linkArray.remove();
 		}
 	};
 
