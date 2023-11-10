@@ -648,6 +648,47 @@ const Home = () => {
 										<p className='h-fit w-full items-center rounded-full bg-bgAccentDark/30 p-2 text-center text-sm font-semibold dark:bg-bgAccentLight/30'>
 											{index + 1}
 										</p>
+
+										<button
+											className='h-fit'
+											onClick={(e: any) => {
+												e.preventDefault();
+												linkArray.move(
+													index,
+													index - 1,
+												);
+											}}
+										>
+											{index !== 0 && (
+												<ChevronUp size={18} />
+											)}
+										</button>
+
+										<button
+											className='h-fit'
+											onClick={(e: any) => {
+												e.preventDefault();
+												linkArray.move(
+													index,
+													index + 1,
+												);
+											}}
+										>
+											{index !==
+												linkArray.fields.length - 1 && (
+												<ChevronDown size={18} />
+											)}
+										</button>
+
+										<button
+											className='h-fit'
+											onClick={(e: any) => {
+												e.preventDefault();
+												linkArray.remove(index);
+											}}
+										>
+											<Trash2 size={18} />
+										</button>
 									</div>
 								</div>
 							))}
