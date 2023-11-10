@@ -198,7 +198,7 @@ const Page = async ({ params }: Props) => {
 								}}
 								width={500}
 								height={500}
-								className=''
+								className='rounded-md dark:shadow-none shadow-md'
 							/>
 						)}
 						{vimeoVideoId && (
