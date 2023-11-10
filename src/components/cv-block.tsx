@@ -23,7 +23,9 @@ const ReferenceBlock = (referenceBlock: Block['referenceBlock']) => {
 				onClick={() => setShowBlock(!showBlock)}
 			>
 				<span className='flex flex-row items-center justify-between space-x-2 px-4'>
-					<p className='font-normal tracking-widest'>References</p>
+					<p className='text-lg font-normal tracking-wide lg:text-xl'>
+						References
+					</p>
 					{showBlock ? (
 						<ChevronDown className='h-5 w-5' />
 					) : (
@@ -61,7 +63,7 @@ const ReferenceBlock = (referenceBlock: Block['referenceBlock']) => {
 							key={i}
 						>
 							<div className='flex w-full flex-row items-center justify-between'>
-								<h1 className='truncate pr-8 text-lg font-semibold tracking-tight lg:text-xl'>
+								<h1 className='text-md truncate pr-8 font-semibold tracking-tight lg:text-lg'>
 									{ref?.name}
 								</h1>
 								{ref?.linkedin && (
@@ -70,12 +72,12 @@ const ReferenceBlock = (referenceBlock: Block['referenceBlock']) => {
 										target='_blank'
 										className='text-bgAccentLight dark:text-bgAccentDark'
 									>
-										<Linkedin className='h-5 w-5' />
+										<Linkedin className='h-4 w-4' />
 									</Link>
 								)}
 							</div>
 							<div className='flex w-full flex-row items-center justify-between'>
-								<p className='pr-8 text-xs italic tracking-wider'>
+								<p className='pr-8 text-xs italic tracking-wide'>
 									{ref?.company} / {ref?.relationship}
 								</p>
 								{ref?.link && (
@@ -84,7 +86,7 @@ const ReferenceBlock = (referenceBlock: Block['referenceBlock']) => {
 										target='_blank'
 										className='text-bgAccentLight dark:text-bgAccentDark'
 									>
-										<LinkIcon className='h-5 w-5' />
+										<LinkIcon className='h-4 w-4' />
 									</Link>
 								)}
 							</div>
@@ -108,7 +110,9 @@ const LinkBlock = (linkBlock: Block['linkBlock']) => {
 				onClick={() => setShowBlock(!showBlock)}
 			>
 				<span className='flex flex-row items-center justify-between space-x-2 px-4'>
-					<p className='font-normal tracking-widest'>Links</p>
+					<p className='text-lg font-normal tracking-wide lg:text-xl'>
+						Links
+					</p>
 					{showBlock ? (
 						<ChevronDown className='h-5 w-5' />
 					) : (
@@ -146,7 +150,7 @@ const LinkBlock = (linkBlock: Block['linkBlock']) => {
 							key={i}
 						>
 							<div className='flex w-full flex-row items-center justify-between'>
-								<h1 className='truncate pr-8 text-lg font-semibold tracking-tight lg:text-xl'>
+								<h1 className='text-md truncate pr-8 font-semibold tracking-tight lg:text-lg'>
 									{link?.name}
 								</h1>
 								{link?.link && (
@@ -155,7 +159,7 @@ const LinkBlock = (linkBlock: Block['linkBlock']) => {
 										target='_blank'
 										className='text-bgAccentLight dark:text-bgAccentDark'
 									>
-										<LinkIcon className='h-5 w-5' />
+										<LinkIcon className='h-4 w-4' />
 									</Link>
 								)}
 							</div>
