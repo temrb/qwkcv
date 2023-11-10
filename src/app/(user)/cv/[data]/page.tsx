@@ -67,7 +67,7 @@ const Page = async ({ params }: Props) => {
 								<Image
 									src={`${jsonData?.photoURL}`}
 									alt={`${jsonData?.name} avatar`}
-									quality={50}
+									quality={35}
 									fill
 									style={{
 										objectFit: 'cover',
@@ -191,7 +191,7 @@ const Page = async ({ params }: Props) => {
 								alt={`${jsonData?.name} photo asset`}
 								sizes='100vw'
 								loading='lazy'
-								quality={50}
+								quality={69}
 								style={{
 									width: '100%',
 									height: 'auto',
