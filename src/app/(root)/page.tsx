@@ -27,6 +27,7 @@ import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form';
 import { UserFormInput } from '@/types/user';
 import Link from 'next/link';
 
+// TODO - REFACTOR REGEX
 const Home = () => {
 	const [searchError, setSearchError] = useState({
 		error: false,
@@ -216,8 +217,8 @@ const Home = () => {
 							${errors.photoURL && 'error-text'}`}
 								>
 									{errors.photoURL
-										? 'Enter valid URL'
-										: 'Photo URL'}
+										? 'Enter valid image URL'
+										: 'Avatar URL'}
 								</p>
 							</span>
 							<input
@@ -228,9 +229,9 @@ const Home = () => {
 								placeholder='https://...'
 								{...register('photoURL', {
 									pattern: {
-										value: /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/,
+										value: /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?\.(png|jpe?g)$/,
 										message:
-											'Entered value does not match website format',
+											'Entered value does not match image format',
 									},
 								})}
 							/>
@@ -679,7 +680,7 @@ const Home = () => {
 							${errors?.assets?.photoURL && 'error-text'}`}
 									>
 										{errors?.assets?.photoURL
-											? 'Enter valid URL'
+											? 'Enter valid Photo URL'
 											: 'Photo URL'}
 									</p>
 								</span>
@@ -690,9 +691,9 @@ const Home = () => {
 									placeholder='https://...'
 									{...register('assets.photoURL', {
 										pattern: {
-											value: /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/,
+											value: /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?\.(png|jpe?g)$/,
 											message:
-												'Entered value does not match website format',
+												'Entered value does not match image format',
 										},
 									})}
 								/>
