@@ -68,9 +68,9 @@ const ReferenceBlock = (referenceBlock: Block['referenceBlock']) => {
 									<Link
 										href={`${ref?.linkedin}`}
 										target='_blank'
-										className='rounded-full bg-bgAccentDark p-2 text-bgAccentLight dark:bg-bgAccentDark dark:text-bgAccentLight'
+										className='text-bgAccentLight dark:text-bgAccentDark'
 									>
-										<Linkedin className='h-4 w-4' />
+										<Linkedin className='h-5 w-5' />
 									</Link>
 								)}
 							</div>
@@ -82,9 +82,9 @@ const ReferenceBlock = (referenceBlock: Block['referenceBlock']) => {
 									<Link
 										href={`${ref?.link}`}
 										target='_blank'
-										className='rounded-full bg-bgAccentDark p-2 text-bgAccentLight dark:bg-bgAccentDark dark:text-bgAccentLight'
+										className='text-bgAccentLight dark:text-bgAccentDark'
 									>
-										<LinkIcon className='h-4 w-4' />
+										<LinkIcon className='h-5 w-5' />
 									</Link>
 								)}
 							</div>
