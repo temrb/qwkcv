@@ -61,8 +61,8 @@ const Page = async ({ params }: Props) => {
 		return (
 			<div className='mx-auto h-full max-w-3xl flex-col items-center justify-center space-y-4 p-4'>
 				<div className='flex h-fit flex-col items-start justify-start space-y-2 capitalize'>
-					{(jsonData?.photoURL || jsonData?.blurb) && (
-						<div className='flex h-full w-full flex-row items-center space-x-4'>
+					<div className='flex h-full w-full flex-row items-center justify-between space-x-4'>
+						{jsonData?.photoURL && (
 							<div className='relative h-16 w-20'>
 								<Image
 									src={`${jsonData?.photoURL}`}
@@ -80,24 +80,22 @@ const Page = async ({ params }: Props) => {
 									loading='lazy'
 								/>
 							</div>
+						)}
+						<h1 className='w-4/5 flex-1 truncate text-2xl font-semibold tracking-tight lg:w-3/5 lg:text-3xl'>
+							{jsonData?.name}
+						</h1>
+						<p className='flex w-1/5 items-center justify-end truncate text-xs tracking-tight lg:w-2/5 lg:text-sm'>
+							{jsonData?.location}
+						</p>
+					</div>
 
-							{jsonData?.blurb && (
-								<p className='h-20 w-full overflow-x-hidden overflow-y-scroll text-xs font-light tracking-wide'>
-									{jsonData?.blurb}
-								</p>
-							)}
-						</div>
+					{jsonData?.blurb && (
+						<p className='h-20 w-full overflow-x-hidden overflow-y-scroll pt-2 text-xs font-light tracking-wide'>
+							{jsonData?.blurb}
+						</p>
 					)}
-					<div className='flex h-full w-full flex-col space-y-4 pb-6 pt-2'>
-						<div className='flex h-full w-full flex-row items-center justify-between space-x-4'>
-							<h1 className='w-4/5 flex-1 truncate text-2xl font-semibold tracking-tight lg:w-3/5 lg:text-3xl'>
-								{jsonData?.name}
-							</h1>
 
-							<p className='flex w-1/5 items-center justify-end truncate text-xs tracking-tight lg:w-2/5 lg:text-sm'>
-								{jsonData?.location}
-							</p>
-						</div>
+					<div className='flex h-full w-full flex-col space-y-6 pb-6 pt-2'>
 						<div className='flex w-full flex-row space-x-4 border-t-2 border-bgAccentDark/20 pt-4 dark:border-bgAccentLight/20'>
 							{jsonData?.email && (
 								<Link
@@ -171,7 +169,7 @@ const Page = async ({ params }: Props) => {
 								</Link>
 							)}
 						</div>
-						<div className='flex h-full w-full flex-col space-y-6 pt-6'>
+						<div className='flex h-full w-full flex-col space-y-6'>
 							{jsonData?.block?.referenceBlock?.length !== 0 && (
 								<CVBlock
 									referenceBlock={
