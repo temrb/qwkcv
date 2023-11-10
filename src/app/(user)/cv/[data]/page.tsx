@@ -82,7 +82,7 @@ const Page = async ({ params }: Props) => {
 							</div>
 						)}
 						<div className='flex w-full flex-col truncate'>
-							<h1 className='w-full truncate text-2xl font-semibold tracking-tight lg:text-3xl'>
+							<h1 className='w-full truncate text-2xl font-semibold tracking-tighter lg:text-3xl'>
 								{jsonData?.name}
 							</h1>
 							<p className='flex w-full items-center truncate text-xs tracking-tight lg:text-sm'>
@@ -92,7 +92,7 @@ const Page = async ({ params }: Props) => {
 					</div>
 
 					{jsonData?.blurb && (
-						<p className='h-20 w-full overflow-x-hidden overflow-y-scroll pt-2 text-xs font-light tracking-widest'>
+						<p className='h-20 w-full overflow-x-hidden overflow-y-scroll pt-2 text-xs font-light normal-case tracking-widest'>
 							{jsonData?.blurb}
 						</p>
 					)}
@@ -102,9 +102,9 @@ const Page = async ({ params }: Props) => {
 							{jsonData?.email && (
 								<Link
 									href={`mailto:${jsonData?.email}`}
-									className='button flex w-fit flex-row items-center space-x-2'
+									className='button flex w-fit flex-row items-center space-x-1'
 								>
-									<Mail className='h-5 w-5' />
+									<Mail className='h-4 w-4' />
 									<p className='hidden text-sm tracking-wider lg:inline-flex'>
 										Email
 									</p>
@@ -113,10 +113,10 @@ const Page = async ({ params }: Props) => {
 							{jsonData?.resumeURL && (
 								<Link
 									href={`${jsonData?.resumeURL}`}
-									className='button flex w-fit flex-row items-center space-x-2'
+									className='button flex w-fit flex-row items-center space-x-1'
 									target='_blank'
 								>
-									<FileText className='h-5 w-5' />
+									<FileText className='h-4 w-4' />
 									<p className='hidden text-sm tracking-wider lg:inline-flex'>
 										Resume
 									</p>
@@ -125,10 +125,10 @@ const Page = async ({ params }: Props) => {
 							{jsonData?.linkedin && (
 								<Link
 									href={`${jsonData?.linkedin}`}
-									className='button flex w-fit flex-row items-center space-x-2'
+									className='button flex w-fit flex-row items-center space-x-1'
 									target='_blank'
 								>
-									<Linkedin className='h-5 w-5' />
+									<Linkedin className='h-4 w-4' />
 									<p className='hidden text-sm tracking-wider lg:inline-flex'>
 										LinkedIn
 									</p>
@@ -137,10 +137,10 @@ const Page = async ({ params }: Props) => {
 							{jsonData?.calendly && (
 								<Link
 									href={`${jsonData?.calendly}`}
-									className='button flex w-fit flex-row items-center space-x-2'
+									className='button flex w-fit flex-row items-center space-x-1'
 									target='_blank'
 								>
-									<CalendarRange className='h-5 w-5' />
+									<CalendarRange className='h-4 w-4' />
 									<p className='hidden text-sm tracking-wider lg:inline-flex'>
 										Calendly
 									</p>
@@ -149,10 +149,10 @@ const Page = async ({ params }: Props) => {
 							{jsonData?.github && (
 								<Link
 									href={`${jsonData?.github}`}
-									className='button flex w-fit flex-row items-center space-x-2'
+									className='button flex w-fit flex-row items-center space-x-1'
 									target='_blank'
 								>
-									<Github className='h-5 w-5' />
+									<Github className='h-4 w-4' />
 									<p className='hidden text-sm tracking-wider lg:inline-flex'>
 										Github
 									</p>
@@ -161,10 +161,10 @@ const Page = async ({ params }: Props) => {
 							{jsonData?.website && (
 								<Link
 									href={`${jsonData?.website}`}
-									className='button flex w-fit flex-row items-center space-x-2'
+									className='button flex w-fit flex-row items-center space-x-1'
 									target='_blank'
 								>
-									<LinkIcon className='h-5 w-5' />
+									<LinkIcon className='h-4 w-4' />
 									<p className='hidden text-sm tracking-wider lg:inline-flex'>
 										Website
 									</p>
@@ -198,7 +198,7 @@ const Page = async ({ params }: Props) => {
 								}}
 								width={500}
 								height={500}
-								className='justify-center rounded-2xl shadow-md dark:shadow-none'
+								className=''
 							/>
 						)}
 						{vimeoVideoId && (
