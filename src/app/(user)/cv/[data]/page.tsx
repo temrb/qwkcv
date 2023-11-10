@@ -81,16 +81,18 @@ const Page = async ({ params }: Props) => {
 								/>
 							</div>
 						)}
-						<h1 className='w-4/5 flex-1 truncate text-2xl font-semibold tracking-tight lg:w-3/5 lg:text-3xl'>
-							{jsonData?.name}
-						</h1>
-						<p className='flex w-1/5 items-center justify-end truncate text-xs tracking-tight lg:w-2/5 lg:text-sm'>
-							{jsonData?.location}
-						</p>
+						<div className='flex w-full flex-col truncate'>
+							<h1 className='w-full truncate text-2xl font-semibold tracking-tight lg:text-3xl'>
+								{jsonData?.name}
+							</h1>
+							<p className='flex w-full items-center truncate text-xs tracking-tight lg:text-sm'>
+								📍{jsonData?.location}
+							</p>
+						</div>
 					</div>
 
 					{jsonData?.blurb && (
-						<p className='h-20 w-full overflow-x-hidden overflow-y-scroll pt-2 text-xs font-light tracking-wide'>
+						<p className='h-20 w-full overflow-x-hidden overflow-y-scroll pt-2 text-xs font-light tracking-widest'>
 							{jsonData?.blurb}
 						</p>
 					)}
@@ -183,6 +185,22 @@ const Page = async ({ params }: Props) => {
 								/>
 							)}
 						</div>
+						{jsonData?.assets?.photoURL && (
+							<Image
+								src={`${jsonData?.assets?.photoURL}`}
+								alt={`${jsonData?.name} photo asset`}
+								sizes='100vw'
+								loading='lazy'
+								quality={50}
+								style={{
+									width: '100%',
+									height: 'auto',
+								}}
+								width={500}
+								height={500}
+								className='justify-center rounded-2xl shadow-md dark:shadow-none'
+							/>
+						)}
 						{vimeoVideoId && (
 							<div
 								style={{
@@ -201,28 +219,14 @@ const Page = async ({ params }: Props) => {
 									}}
 									allow='autoplay; fullscreen; picture-in-picture'
 								></iframe>
+								<Script
+									src='https://player.vimeo.com/api/player.js'
+									async
+								/>
 							</div>
-						)}
-
-						{jsonData?.assets?.photoURL && (
-							<Image
-								src={`${jsonData?.assets?.photoURL}`}
-								alt={`${jsonData?.name} photo asset`}
-								sizes='100vw'
-								loading='lazy'
-								quality={50}
-								style={{
-									width: '100%',
-									height: 'auto',
-								}}
-								width={500}
-								height={500}
-								className='justify-center rounded-2xl shadow-md dark:shadow-none'
-							/>
 						)}
 					</div>
 				</div>
-				<Script src='https://player.vimeo.com/api/player.js' async />
 			</div>
 		);
 	} else {
