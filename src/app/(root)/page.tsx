@@ -3,14 +3,11 @@ import base64url from 'base64url';
 
 import {
 	ArrowUpRightSquare,
-	Building2,
 	CalendarRange,
-	CaseSensitive,
 	ChevronDown,
 	ChevronUp,
 	FileText,
 	Github,
-	HeartHandshake,
 	Image as ImageIcon,
 	Link as LinkIcon,
 	Linkedin,
@@ -26,6 +23,9 @@ import React, { useState } from 'react';
 import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form';
 import { UserFormInput } from '@/types/user';
 import Link from 'next/link';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
 
 // TODO - REFACTOR REGEX
 const Home = () => {
@@ -66,6 +66,7 @@ const Home = () => {
 	const handleAddLink = () => {
 		linkArray.append({
 			name: '',
+			description: '',
 			link: '',
 			itemPosition: 0,
 		});
@@ -143,6 +144,8 @@ const Home = () => {
 			setValue('github', '');
 			setValue('website', '');
 			setValue('calendly', '');
+			setValue('block.referenceBlock', null);
+			setValue('block.linkBlock', null);
 			setValue('assets.photoURL', '');
 			setValue('assets.vimeoURL', '');
 
@@ -163,11 +166,12 @@ const Home = () => {
 						? searchError.errorMessage
 						: '👇 Paste your QwkCV link to load data. 👇'}
 				</h2>
-				<input
+				<Input
 					type='text'
-					className='border-b-2 border-bgAccentDark bg-transparent p-2
-					text-bgAccentDark placeholder-bgAccentDark/50 outline-none dark:border-bgAccentLight
-					dark:text-bgAccentLight dark:placeholder-bgAccentLight/50'
+					className={`w-full text-xs ${
+						searchError.error &&
+						'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+					}`}
 					onChange={(e: any) => {
 						e.preventDefault();
 						handleLoadData(e);
@@ -188,9 +192,11 @@ const Home = () => {
 									{errors.name ? 'Name Required' : 'Name'}
 								</p>
 							</span>
-							<input
-								className={`primary-input w-full text-xs lg:w-96
-										${errors.name && 'error-input'}`}
+							<Input
+								className={`w-full text-xs ${
+									errors.name &&
+									'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+								}`}
 								type='text'
 								placeholder={
 									errors.name ? 'Name Required' : 'Tem'
@@ -212,9 +218,11 @@ const Home = () => {
 									{errors.blurb ? 'Blurb Required' : 'Blurb'}
 								</p>
 							</span>
-							<textarea
-								className={`text-area h-20 text-xs font-light
-								${errors.blurb && 'error-input'}`}
+							<Textarea
+								className={`w-full text-xs ${
+									errors.blurb &&
+									'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+								}`}
 								placeholder='I am a Product Designer with 5 years of experience in the field. I have worked with companies like Google, Facebook, and Amazon.'
 								{...register('blurb', {
 									required: false,
@@ -237,10 +245,11 @@ const Home = () => {
 										: 'Avatar URL'}
 								</p>
 							</span>
-							<input
-								className={`primary-input w-full text-xs lg:w-72
-								${errors.photoURL && 'error-input'}
-								  `}
+							<Input
+								className={`w-full text-xs ${
+									errors.photoURL &&
+									'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+								}`}
 								type='text'
 								placeholder='https://...'
 								{...register('photoURL', {
@@ -264,9 +273,11 @@ const Home = () => {
 										: 'Current Location'}
 								</p>
 							</span>
-							<input
-								className={`primary-input w-full text-xs lg:w-72
-								${errors.location && 'error-input'}`}
+							<Input
+								className={`w-full text-xs ${
+									errors.location &&
+									'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+								}`}
 								type='text'
 								placeholder='City'
 								required
@@ -287,10 +298,11 @@ const Home = () => {
 										: 'Resume URL'}
 								</p>
 							</span>
-							<input
-								className={`primary-input w-full text-xs lg:w-72
-								${errors.resumeURL && 'error-input'}
-								  `}
+							<Input
+								className={`w-full text-xs ${
+									errors.resumeURL &&
+									'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+								}`}
 								type='url'
 								placeholder='https://docs.google.com/document/d/{id}'
 								{...register('resumeURL', {
@@ -315,10 +327,11 @@ const Home = () => {
 										: 'Email'}
 								</p>
 							</span>
-							<input
-								className={`primary-input w-full text-xs lg:w-72
-							${errors.email && 'error-input'}
-							  `}
+							<Input
+								className={`w-full text-xs ${
+									errors.email &&
+									'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+								}`}
 								type='email'
 								placeholder='superdupercoolemail@gmail.com'
 								{...register('email', {
@@ -342,10 +355,11 @@ const Home = () => {
 										: 'LinkedIn'}
 								</p>
 							</span>
-							<input
-								className={`primary-input w-full text-xs lg:w-72
-							${errors.linkedin && 'error-input'}
-							  `}
+							<Input
+								className={`w-full text-xs ${
+									errors.linkedin &&
+									'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+								}`}
 								type='url'
 								placeholder='https://www.linkedin.com/in/...'
 								{...register('linkedin', {
@@ -370,11 +384,11 @@ const Home = () => {
 										: 'GitHub'}
 								</p>
 							</span>
-							<input
-								className={`primary-input w-full text-xs lg:w-72 ${
-									errors.github && 'error-input'
-								}
-					  `}
+							<Input
+								className={`w-full text-xs ${
+									errors.github &&
+									'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+								}`}
 								type='url'
 								placeholder='https://github.com/...'
 								{...register('github', {
@@ -398,9 +412,11 @@ const Home = () => {
 										: 'Website'}
 								</p>
 							</span>
-							<input
-								className={`primary-input w-full text-xs lg:w-72
-							${errors.website && 'error-input'}   `}
+							<Input
+								className={`w-full text-xs ${
+									errors.website &&
+									'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+								}`}
 								type='url'
 								placeholder='Personal Website'
 								{...register('website', {
@@ -424,10 +440,11 @@ const Home = () => {
 										: 'Calendly Event'}
 								</p>
 							</span>
-							<input
-								className={`primary-input w-full text-xs lg:w-72 ${
-									errors.calendly && 'error-input'
-								}   `}
+							<Input
+								className={`w-full text-xs ${
+									errors.calendly &&
+									'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+								}`}
 								type='url'
 								placeholder=' https://calendly.com/.../...'
 								{...register('calendly', {
@@ -443,25 +460,35 @@ const Home = () => {
 
 					{/* references */}
 					<div className='space-y-2'>
-						<div className='flex w-full flex-row items-center border-b-2 border-dotted border-bgAccentDark p-2 dark:border-bgAccentLight'>
-							<h1 className='text-sm font-semibold lg:text-lg'>
+						<div className='border-foreground flex w-full flex-row items-center justify-center border-b-2 border-dotted p-2'>
+							<h1 className='text-lg font-semibold tracking-wider'>
 								References
 							</h1>
 						</div>
-						<div className='flex flex-col space-y-7 pt-2'>
+						<div className='flex flex-col space-y-7 pt-1'>
 							{referenceArray.fields.map((item, index) => (
 								<div
 									key={item.id}
-									className='flex w-full space-x-4'
+									className={`flex w-full space-x-4 ${
+										index !== 0 &&
+										'border-foreground/20 border-t-[1px] pt-6'
+									}`}
 								>
-									<div className='grid w-full grid-cols-2 items-center gap-2 space-y-2'>
-										<span className='flex flex-row items-center space-x-2 font-light'>
-											<CaseSensitive size={18} />
-											<input
-												className={`primary-input w-full text-xs lg:w-56
-											${errors.block?.referenceBlock?.[index]?.name && 'error-input'}`}
+									<div className='grid w-full grid-cols-1 gap-4 lg:grid-cols-2'>
+										<div className='flex flex-col space-y-1'>
+											<label className='text-sm font-light'>
+												Name:
+											</label>
+											<Input
+												className={`w-full text-xs ${
+													errors.block
+														?.referenceBlock?.[
+														index
+													]?.name &&
+													'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+												}`}
 												type='text'
-												placeholder='Name'
+												placeholder='Tim Apple'
 												{...register(
 													`block.referenceBlock.${index}.name`,
 													{
@@ -469,14 +496,21 @@ const Home = () => {
 													},
 												)}
 											/>
-										</span>
-										<span className='flex flex-row items-center space-x-2 font-light'>
-											<Linkedin size={18} />
-											<input
-												className={`primary-input w-full text-xs lg:w-56
-											  `}
+										</div>
+										<div className='flex flex-col space-y-1'>
+											<label className='text-sm font-light'>
+												LinkedIn:
+											</label>
+											<Input
+												className={`w-full text-xs ${
+													errors.block
+														?.referenceBlock?.[
+														index
+													]?.linkedin &&
+													'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+												}`}
 												type='url'
-												placeholder='Reference LinkedIn'
+												placeholder='https://www.linkedin.com/in/...'
 												{...register(
 													`block.referenceBlock.${index}.linkedin`,
 													{
@@ -489,15 +523,21 @@ const Home = () => {
 													},
 												)}
 											/>
-										</span>
-										<span className='flex flex-row items-center space-x-2 font-light'>
-											<Building2 size={18} />
-											<input
-												className={`primary-input w-full text-xs lg:w-56
-											${errors.block?.referenceBlock?.[index]?.company && 'error-input'}
-											  `}
+										</div>
+										<div className='flex flex-col space-y-1'>
+											<label className='text-sm font-light'>
+												Company:
+											</label>
+											<Input
+												className={`w-full text-xs ${
+													errors.block
+														?.referenceBlock?.[
+														index
+													]?.company &&
+													'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+												}`}
 												type='text'
-												placeholder='Company'
+												placeholder='Apple'
 												{...register(
 													`block.referenceBlock.${index}.company`,
 													{
@@ -505,19 +545,21 @@ const Home = () => {
 													},
 												)}
 											/>
-										</span>
-										<span
-											className={
-												'flex flex-row items-center space-x-2 font-light'
-											}
-										>
-											<HeartHandshake size={18} />
-											<input
-												className={`primary-input w-full text-xs lg:w-56
-											${errors.block?.referenceBlock?.[index]?.relationship && 'error-input'}
-											  `}
-												type='text'
-												placeholder='Relationship'
+										</div>
+										<div className='flex flex-col space-y-1'>
+											<label className='text-sm font-light'>
+												Relationship:
+											</label>
+											<Input
+												className={`w-full text-xs ${
+													errors.block
+														?.referenceBlock?.[
+														index
+													]?.relationship &&
+													'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+												}`}
+												type='url'
+												placeholder='Manager'
 												{...register(
 													`block.referenceBlock.${index}.relationship`,
 													{
@@ -525,15 +567,21 @@ const Home = () => {
 													},
 												)}
 											/>
-										</span>
-										<span className='flex flex-row items-center space-x-2 font-light '>
-											<LinkIcon size={18} />
-											<input
-												className={`primary-input w-full text-xs lg:w-56
-											${errors.block?.referenceBlock?.[index]?.link && 'error-input'}
-											  `}
+										</div>
+										<div className='flex flex-col space-y-1'>
+											<label className='text-sm font-light'>
+												Reference Link:
+											</label>
+											<Input
+												className={`w-full text-xs ${
+													errors.block
+														?.referenceBlock?.[
+														index
+													]?.link &&
+													'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+												}`}
 												type='url'
-												placeholder='Reference Link'
+												placeholder='https://docs.google.com/document/d/...'
 												{...register(
 													`block.referenceBlock.${index}.link`,
 													{
@@ -541,15 +589,15 @@ const Home = () => {
 														pattern: {
 															value: /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/,
 															message:
-																'Entered value does not match website format',
+																'Entered value is not a valid URL',
 														},
 													},
 												)}
 											/>
-										</span>
+										</div>
 									</div>
 									<div className='flex w-10 flex-col items-center justify-start space-y-4'>
-										<p className='h-fit w-full items-center rounded-full bg-bgAccentDark/30 p-2 text-center text-sm font-semibold dark:bg-bgAccentLight/30'>
+										<p className='bg-foreground/30 h-fit w-full items-center rounded-full p-2 text-center text-sm font-semibold'>
 											{index + 1}
 										</p>
 
@@ -567,7 +615,6 @@ const Home = () => {
 												<ChevronUp size={18} />
 											)}
 										</button>
-
 										<button
 											className='h-fit'
 											onClick={(e: any) => {
@@ -598,70 +645,108 @@ const Home = () => {
 								</div>
 							))}
 							<span className='flex w-full justify-center'>
-								<button
-									className='primary-button flex w-fit flex-row items-center space-x-2'
+								<Button
+									variant={'outline'}
+									className='flex w-fit flex-row items-center space-x-2'
 									type='button'
 									onClick={handleAddReference}
 								>
 									<Plus size={14} />
 									<p className='text-sm font-semibold'>Add</p>
-								</button>
+								</Button>
 							</span>
 						</div>
 					</div>
 
 					{/* links */}
 					<div className='space-y-2'>
-						<div className='flex w-full flex-row items-center border-b-2 border-dotted border-bgAccentDark p-2 dark:border-bgAccentLight'>
-							<h1 className='text-sm font-semibold lg:text-lg'>
+						<div className='border-foreground flex w-full flex-row items-center justify-center border-b-2 border-dotted p-2'>
+							<h1 className='text-lg font-semibold tracking-wider'>
 								Links
 							</h1>
 						</div>
-						<div className='flex flex-col space-y-7 pt-2'>
+						<div className='flex flex-col space-y-7 pt-1'>
 							{linkArray.fields.map((item, index) => (
 								<div
 									key={item.id}
-									className='flex w-full space-x-4'
+									className={`flex w-full space-x-4 ${
+										index !== 0 &&
+										'border-foreground/20 border-t-[1px] pt-6'
+									}`}
 								>
-									<div className='grid w-full grid-cols-2 items-center gap-2 space-y-2'>
-										<span className='flex flex-row items-center space-x-2 font-light'>
-											<CaseSensitive size={18} />
-											<input
-												className={`primary-input w-full text-xs lg:w-56
-											${errors.block?.linkBlock?.[index]?.name && 'error-input'}`}
-												type='text'
-												placeholder='Name'
-												{...register(
-													`block.linkBlock.${index}.name`,
-													{
-														required: true,
-													},
-												)}
-											/>
-										</span>
-										<span className='flex flex-row items-center space-x-2 font-light'>
-											<LinkIcon size={18} />
-											<input
-												className={`primary-input w-full text-xs lg:w-56
-											${errors.block?.linkBlock?.[index]?.link && 'error-input'}`}
-												type='url'
-												placeholder='Link'
-												{...register(
-													`block.linkBlock.${index}.link`,
-													{
-														required: true,
-														pattern: {
-															value: /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
-															message:
-																'Entered value does not match website format',
+									<div className='flex w-full flex-col'>
+										<div className='grid w-full grid-cols-1 gap-4 lg:grid-cols-2'>
+											<div className='flex flex-col space-y-1'>
+												<label className='text-sm font-light'>
+													Name:
+												</label>
+												<Input
+													className={`w-full text-xs ${
+														errors.block
+															?.linkBlock?.[index]
+															?.name &&
+														'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+													}`}
+													type='text'
+													placeholder='Tim Apple'
+													{...register(
+														`block.linkBlock.${index}.name`,
+														{
+															required: true,
 														},
+													)}
+												/>
+											</div>
+											<div className='flex flex-col space-y-1'>
+												<label className='text-sm font-light'>
+													Link:
+												</label>
+												<Input
+													className={`w-full text-xs ${
+														errors.block
+															?.linkBlock?.[index]
+															?.link &&
+														'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+													}`}
+													type='url'
+													placeholder='somelink.com'
+													{...register(
+														`block.referenceBlock.${index}.link`,
+														{
+															required: false,
+															pattern: {
+																value: /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?/,
+																message:
+																	'Entered value is not a valid URL',
+															},
+														},
+													)}
+												/>
+											</div>
+										</div>
+										<div className='flex flex-col space-y-1 pt-4'>
+											<label className='text-sm font-light'>
+												Description:
+											</label>
+											<Textarea
+												className={`w-full text-xs ${
+													errors.block?.linkBlock?.[
+														index
+													]?.description &&
+													'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+												}`}
+												placeholder='What did you do?'
+												{...register(
+													`block.linkBlock.${index}.description`,
+													{
+														required: false,
 													},
 												)}
 											/>
-										</span>
+										</div>
 									</div>
 									<div className='flex w-10 flex-col items-center justify-start space-y-4'>
-										<p className='h-fit w-full items-center rounded-full bg-bgAccentDark/30 p-2 text-center text-sm font-semibold dark:bg-bgAccentLight/30'>
+										<p className='bg-foreground/30 h-fit w-full items-center rounded-full p-2 text-center text-sm font-semibold'>
 											{index + 1}
 										</p>
 
@@ -679,7 +764,6 @@ const Home = () => {
 												<ChevronUp size={18} />
 											)}
 										</button>
-
 										<button
 											className='h-fit'
 											onClick={(e: any) => {
@@ -695,7 +779,6 @@ const Home = () => {
 												<ChevronDown size={18} />
 											)}
 										</button>
-
 										<button
 											className='h-fit'
 											onClick={(e: any) => {
@@ -708,27 +791,29 @@ const Home = () => {
 									</div>
 								</div>
 							))}
+
 							<span className='flex w-full justify-center'>
-								<button
-									className='primary-button flex w-fit flex-row items-center space-x-2'
+								<Button
+									variant={'outline'}
+									className='flex w-fit flex-row items-center space-x-2'
 									type='button'
 									onClick={handleAddLink}
 								>
 									<Plus size={14} />
 									<p className='text-sm font-semibold'>Add</p>
-								</button>
+								</Button>
 							</span>
 						</div>
 					</div>
 
 					{/* assets */}
 					<div className='space-y-2'>
-						<div className='flex w-full flex-row items-center border-b-2 border-dotted border-bgAccentDark p-2 dark:border-bgAccentLight'>
-							<h1 className='text-sm font-semibold lg:text-lg'>
+						<div className='border-foreground flex w-full flex-row items-center justify-center border-b-2 border-dotted p-2'>
+							<h1 className='text-lg font-semibold tracking-wider'>
 								Assets
 							</h1>
 						</div>
-						<div className='grid items-center gap-4 space-y-4 px-2 pt-2 lg:grid-cols-2 lg:space-y-0 lg:px-0'>
+						<div className='grid items-center gap-4 px-2 pt-2 lg:grid-cols-2 lg:px-0'>
 							<div className='flex w-full flex-col space-y-2'>
 								<span className='flex flex-row items-center space-x-2'>
 									<ImageIcon size={16} />
@@ -741,9 +826,11 @@ const Home = () => {
 											: 'Photo URL'}
 									</p>
 								</span>
-								<input
-									className={`primary-input w-full text-xs lg:w-72
-								${errors?.assets?.photoURL && 'error-input'}`}
+								<Input
+									className={`w-full text-xs ${
+										errors?.assets?.photoURL &&
+										'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+									}`}
 									type='text'
 									placeholder='https://...'
 									{...register('assets.photoURL', {
@@ -767,9 +854,11 @@ const Home = () => {
 											: 'Vimeo Video URL'}
 									</p>
 								</span>
-								<input
-									className={`primary-input w-full text-xs lg:w-72
-								${errors?.assets?.vimeoURL && 'error-input'}`}
+								<Input
+									className={`w-full text-xs ${
+										errors?.assets?.vimeoURL &&
+										'!ring-2 !ring-red-600 !ring-offset-2 dark:!ring-red-400'
+									}`}
 									type='text'
 									placeholder='https://vimeo.com/867098346'
 									{...register('assets.vimeoURL', {
@@ -784,11 +873,7 @@ const Home = () => {
 						</div>
 					</div>
 				</div>
-				<div
-					className='sticky bottom-0 flex h-16 w-full  items-center justify-between border-t-2
-				border-bgAccentDark/20 bg-bgAccentLight text-bgAccentDark
-				dark:border-bgAccentLight/20 dark:bg-bgAccentDark dark:text-bgAccentLight'
-				>
+				<div className='bg-background border-foreground/20 sticky bottom-0 flex  h-16 w-full items-center justify-between border-t-2'>
 					<Link
 						className='h-16 w-fit underline-offset-4 hover:underline'
 						href='https://dub.co/'
@@ -800,8 +885,9 @@ const Home = () => {
 							</p>
 						</span>
 					</Link>
-					<button
-						className='h-16 w-fit'
+					<Button
+						variant={'default'}
+						className=' w-fit'
 						type='submit'
 						onClick={handleSubmit(onSubmit)}
 					>
@@ -809,7 +895,7 @@ const Home = () => {
 							<h1 className='text-lg font-semibold'>View</h1>
 							<ArrowUpRightSquare size={18} />
 						</span>
-					</button>
+					</Button>
 				</div>
 			</form>
 		</div>

@@ -1,13 +1,13 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import {
+	ArrowUpRightSquare,
 	CalendarRange,
 	FileText,
 	Github,
 	Link as LinkIcon,
 	Linkedin,
 	Mail,
-	MapPin,
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,6 +15,12 @@ import { UserFormInput } from '@/types/user';
 import base64url from 'base64url';
 import Script from 'next/script';
 import CVBlock from '@/components/cv-block';
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from '@/components/ui/accordion';
 
 type Props = {
 	params: {
@@ -44,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	};
 }
 
-const Page = async ({ params }: Props) => {
+const Page = ({ params }: Props) => {
 	const data = params.data;
 	const jsonData = decodeData(data);
 
@@ -59,7 +65,7 @@ const Page = async ({ params }: Props) => {
 
 	if (jsonData) {
 		return (
-			<div className='mx-auto h-full max-w-3xl flex-col items-center justify-center space-y-4 p-4'>
+			<div className='mx-auto h-full max-w-3xl flex-col items-center justify-center space-y-8 p-4'>
 				<div className='flex h-fit flex-col items-start justify-start space-y-2 capitalize'>
 					<div className='flex h-full w-full flex-row items-center justify-between space-x-4'>
 						{jsonData?.photoURL && (
@@ -98,11 +104,11 @@ const Page = async ({ params }: Props) => {
 					)}
 
 					<div className='flex h-full w-full flex-col space-y-6 pb-6 pt-2'>
-						<div className='flex w-full flex-row space-x-4 border-t-2 border-bgAccentDark/20 pt-4 dark:border-bgAccentLight/20'>
+						<div className='border-foreground/20 flex w-full flex-row space-x-6 border-t-[1px] pt-4'>
 							{jsonData?.email && (
 								<Link
 									href={`mailto:${jsonData?.email}`}
-									className='button flex w-fit flex-row items-center space-x-1'
+									className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
 								>
 									<Mail className='h-4 w-4' />
 									<p className='hidden text-sm tracking-wider lg:inline-flex'>
@@ -113,7 +119,7 @@ const Page = async ({ params }: Props) => {
 							{jsonData?.resumeURL && (
 								<Link
 									href={`${jsonData?.resumeURL}`}
-									className='button flex w-fit flex-row items-center space-x-1'
+									className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
 									target='_blank'
 								>
 									<FileText className='h-4 w-4' />
@@ -125,7 +131,7 @@ const Page = async ({ params }: Props) => {
 							{jsonData?.linkedin && (
 								<Link
 									href={`${jsonData?.linkedin}`}
-									className='button flex w-fit flex-row items-center space-x-1'
+									className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
 									target='_blank'
 								>
 									<Linkedin className='h-4 w-4' />
@@ -137,7 +143,7 @@ const Page = async ({ params }: Props) => {
 							{jsonData?.calendly && (
 								<Link
 									href={`${jsonData?.calendly}`}
-									className='button flex w-fit flex-row items-center space-x-1'
+									className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
 									target='_blank'
 								>
 									<CalendarRange className='h-4 w-4' />
@@ -149,7 +155,7 @@ const Page = async ({ params }: Props) => {
 							{jsonData?.github && (
 								<Link
 									href={`${jsonData?.github}`}
-									className='button flex w-fit flex-row items-center space-x-1'
+									className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
 									target='_blank'
 								>
 									<Github className='h-4 w-4' />
@@ -161,7 +167,7 @@ const Page = async ({ params }: Props) => {
 							{jsonData?.website && (
 								<Link
 									href={`${jsonData?.website}`}
-									className='button flex w-fit flex-row items-center space-x-1'
+									className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
 									target='_blank'
 								>
 									<LinkIcon className='h-4 w-4' />
@@ -171,61 +177,102 @@ const Page = async ({ params }: Props) => {
 								</Link>
 							)}
 						</div>
-						<div className='flex h-full w-full flex-col space-y-6'>
+
+						<Accordion type='single' collapsible>
 							{jsonData?.block?.referenceBlock?.length !== 0 && (
-								<CVBlock
-									referenceBlock={
-										jsonData?.block?.referenceBlock
-									}
-								/>
+								<AccordionItem value='item-1'>
+									<AccordionTrigger>
+										References
+									</AccordionTrigger>
+									<AccordionContent>
+										<CVBlock
+											referenceBlock={
+												jsonData?.block?.referenceBlock
+											}
+										/>
+									</AccordionContent>
+								</AccordionItem>
 							)}
 							{jsonData?.block?.linkBlock?.length !== 0 && (
-								<CVBlock
-									linkBlock={jsonData?.block?.linkBlock}
-								/>
+								<AccordionItem value='item-2'>
+									<AccordionTrigger>Links</AccordionTrigger>
+									<AccordionContent>
+										<CVBlock
+											linkBlock={
+												jsonData?.block?.linkBlock
+											}
+										/>
+									</AccordionContent>
+								</AccordionItem>
 							)}
-						</div>
-						{jsonData?.assets?.photoURL && (
-							<Image
-								src={`${jsonData?.assets?.photoURL}`}
-								alt={`${jsonData?.name} photo asset`}
-								sizes='100vw'
-								loading='lazy'
-								quality={69}
-								style={{
-									width: '100%',
-									height: 'auto',
-								}}
-								width={500}
-								height={500}
-								className='rounded-md dark:shadow-none shadow-md'
+							{jsonData?.assets?.photoURL && (
+								<AccordionItem value='item-3'>
+									<AccordionTrigger>Image</AccordionTrigger>
+									<AccordionContent>
+										<Image
+											src={`${jsonData?.assets?.photoURL}`}
+											alt={`${jsonData?.name} photo asset`}
+											sizes='100vw'
+											loading='lazy'
+											quality={50}
+											style={{
+												width: '100%',
+												height: 'auto',
+											}}
+											width={500}
+											height={500}
+										/>
+									</AccordionContent>
+								</AccordionItem>
+							)}
+							{vimeoVideoId && (
+								<AccordionItem value='item-4'>
+									<AccordionTrigger>Video</AccordionTrigger>
+									<AccordionContent>
+										<div
+											style={{
+												padding: '56.25% 0 0 0',
+												position: 'relative',
+											}}
+										>
+											<iframe
+												src={`https://player.vimeo.com/video/${vimeoVideoId}`}
+												style={{
+													position: 'absolute',
+													top: '0',
+													left: '0',
+													width: '100%',
+													height: '100%',
+												}}
+												allow='autoplay; fullscreen; picture-in-picture'
+											></iframe>
+										</div>
+									</AccordionContent>
+								</AccordionItem>
+							)}
+						</Accordion>
+						{vimeoVideoId && (
+							<Script
+								src='https://player.vimeo.com/api/player.js'
+								async
 							/>
 						)}
-						{vimeoVideoId && (
-							<div
-								style={{
-									padding: '56.25% 0 0 0',
-									position: 'relative',
-								}}
-							>
-								<iframe
-									src={`https://player.vimeo.com/video/${vimeoVideoId}`}
-									style={{
-										position: 'absolute',
-										top: '0',
-										left: '0',
-										width: '100%',
-										height: '100%',
-									}}
-									allow='autoplay; fullscreen; picture-in-picture'
-								></iframe>
-								<Script
-									src='https://player.vimeo.com/api/player.js'
-									async
-								/>
-							</div>
-						)}
 					</div>
+				</div>
+				<div className='bg-background bottom-0 flex h-14 w-full items-center justify-end'>
+					<Link
+						className='w-fit underline-offset-4 hover:underline'
+						href='/'
+						target='_blank'
+					>
+						<span className='flex h-full w-full flex-row items-center justify-center space-x-2'>
+							<p className='text-xs font-light'>Create a QwkCV</p>
+							<ArrowUpRightSquare
+								size={14}
+								className='text-foreground/80'
+							/>
+						</span>
+					</Link>
 				</div>
 			</div>
 		);
@@ -233,9 +280,7 @@ const Page = async ({ params }: Props) => {
 		return (
 			<div className='flex h-full w-full flex-col items-center justify-center space-y-2 p-4'>
 				<p>Oops! Something went wrong.</p>
-				<Link href='/' className='button'>
-					Go back
-				</Link>
+				<Link href='/'>Go back</Link>
 			</div>
 		);
 	}
