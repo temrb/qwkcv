@@ -73,7 +73,7 @@ const Page = ({ params }: Props) => {
 								<Image
 									src={`${jsonData?.photoURL}`}
 									alt={`${jsonData?.name} avatar`}
-									quality={50}
+									quality={35}
 									fill
 									style={{
 										objectFit: 'cover',
