@@ -22,26 +22,30 @@ const ReferenceBlock = (referenceBlock: Block['referenceBlock']) => {
 						{ref?.company} - {ref?.relationship}
 					</p>
 					<div className='flex flex-row items-center space-x-6'>
-						<Link
-							href={`${ref?.link}`}
-							className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
-							target='_blank'
-						>
-							<LinkIcon className='h-4 w-4' />
-							<p className='hidden text-sm tracking-wider lg:inline-flex'>
-								Link to Reference
-							</p>
-						</Link>
-						<Link
-							href={`${ref?.linkedin}`}
-							className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
-							target='_blank'
-						>
-							<Linkedin className='h-4 w-4' />
-							<p className='hidden text-sm tracking-wider lg:inline-flex'>
-								LinkedIn
-							</p>
-						</Link>
+						{ref?.link && (
+							<Link
+								href={`${ref?.link}`}
+								className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
+								target='_blank'
+							>
+								<LinkIcon className='h-4 w-4' />
+								<p className='hidden text-sm tracking-wider lg:inline-flex'>
+									Link to Reference
+								</p>
+							</Link>
+						)}
+						{ref?.linkedin && (
+							<Link
+								href={`${ref?.linkedin}`}
+								className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
+								target='_blank'
+							>
+								<Linkedin className='h-4 w-4' />
+								<p className='hidden text-sm tracking-wider lg:inline-flex'>
+									LinkedIn
+								</p>
+							</Link>
+						)}
 					</div>
 				</div>
 			))}
@@ -62,21 +66,25 @@ const LinkBlock = (linkBlock: Block['linkBlock']) => {
 					<h1 className='w-full truncate text-lg font-semibold tracking-tight'>
 						{link?.name}
 					</h1>
-					<p className='w-full truncate text-sm font-light tracking-tight'>
-						{link?.description}
-					</p>
-					<div className='flex flex-row items-center space-x-6'>
-						<Link
-							href={`${link?.link}`}
-							className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
-							target='_blank'
-						>
-							<LinkIcon className='h-4 w-4' />
-							<p className='hidden text-sm tracking-wider lg:inline-flex'>
-								Link
-							</p>
-						</Link>
-					</div>
+					{link?.description && (
+						<p className='w-full truncate text-sm font-light tracking-tight'>
+							{link?.description}
+						</p>
+					)}
+					{link?.link && (
+						<div className='flex flex-row items-center space-x-6'>
+							<Link
+								href={`${link?.link}`}
+								className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
+								target='_blank'
+							>
+								<LinkIcon className='h-4 w-4' />
+								<p className='hidden text-sm tracking-wider lg:inline-flex'>
+									Link
+								</p>
+							</Link>
+						</div>
+					)}
 				</div>
 			))}
 		</div>
