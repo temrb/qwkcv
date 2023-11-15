@@ -1,172 +1,84 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Block } from '@/types/user';
-import {
-	ChevronDown,
-	ChevronUp,
-	Linkedin,
-	Link as LinkIcon,
-} from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Linkedin, Link as LinkIcon } from 'lucide-react';
 import Link from 'next/link';
 
 const ReferenceBlock = (referenceBlock: Block['referenceBlock']) => {
-	const [showBlock, setShowBlock] = useState(false);
 	const referencesArray = Object.values(referenceBlock || {});
 
 	return (
-		<div className='flex h-full w-full flex-col'>
-			<button
-				className={`select-button h-16 w-full items-center justify-center rounded-2xl
-			${showBlock ? 'select-button-active rounded-b-none' : 'select-button-hover'}`}
-				onClick={() => setShowBlock(!showBlock)}
-			>
-				<span className='flex flex-row items-center justify-between space-x-2 px-4'>
-					<p className='text-lg font-normal tracking-wide lg:text-xl'>
-						References
-					</p>
-					{showBlock ? (
-						<ChevronDown className='h-5 w-5' />
-					) : (
-						<ChevronUp className='h-5 w-5' />
-					)}
-				</span>
-			</button>
-			{showBlock && (
-				<motion.div
-					className='flex h-full w-full transform flex-col space-y-4 divide-y-2 divide-bgAccentLight
-					rounded-2xl rounded-t-none border-t-2 border-dotted
-					border-bgAccentLight border-b-bgAccentLight bg-bgAccentDark p-4 text-bgAccentLight shadow-md
-					dark:divide-bgAccentDark dark:border-bgAccentDark dark:border-b-bgAccentDark dark:bg-bgAccentLight
-					dark:text-bgAccentDark dark:shadow-none'
-					initial={{ opacity: 0, y: -50 }}
-					animate={{
-						opacity: 1,
-						y: 0,
-						transition: {
-							ease: 'easeInOut',
-							duration: 0.6,
-							type: 'spring',
-							stiffness: 300,
-							damping: 40,
-							opacity: {
-								delay: 0.125,
-								duration: 0.25,
-							},
-						},
-					}}
+		<div className='divide-y-[1px]'>
+			{referencesArray?.map((ref, i) => (
+				<div
+					className='flex h-full w-full flex-col space-y-3 py-4'
+					key={i}
 				>
-					{referencesArray?.map((ref, i) => (
-						<div
-							className='flex h-full w-full flex-col space-y-2 p-4'
-							key={i}
+					<h1 className='w-full truncate text-lg font-semibold tracking-tight'>
+						{ref?.name}
+					</h1>
+					<p className='w-full truncate text-sm font-light tracking-tight'>
+						{ref?.company} - {ref?.relationship}
+					</p>
+					<div className='flex flex-row items-center space-x-6'>
+						<Link
+							href={`${ref?.link}`}
+							className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
+							target='_blank'
 						>
-							<div className='flex w-full flex-row items-center justify-between'>
-								<h1 className='text-md truncate pr-8 font-semibold tracking-tight lg:text-lg'>
-									{ref?.name}
-								</h1>
-								{ref?.linkedin && (
-									<Link
-										href={`${ref?.linkedin}`}
-										target='_blank'
-										className='text-bgAccentLight dark:text-bgAccentDark'
-									>
-										<Linkedin className='h-4 w-4' />
-									</Link>
-								)}
-							</div>
-							<div className='flex w-full flex-row items-center justify-between'>
-								<p className='pr-8 text-xs italic tracking-wide'>
-									{ref?.company} / {ref?.relationship}
-								</p>
-								{ref?.link && (
-									<Link
-										href={`${ref?.link}`}
-										target='_blank'
-										className='text-bgAccentLight dark:text-bgAccentDark'
-									>
-										<LinkIcon className='h-4 w-4' />
-									</Link>
-								)}
-							</div>
-						</div>
-					))}
-				</motion.div>
-			)}
+							<LinkIcon className='h-4 w-4' />
+							<p className='hidden text-sm tracking-wider lg:inline-flex'>
+								Link to Reference
+							</p>
+						</Link>
+						<Link
+							href={`${ref?.linkedin}`}
+							className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
+							target='_blank'
+						>
+							<Linkedin className='h-4 w-4' />
+							<p className='hidden text-sm tracking-wider lg:inline-flex'>
+								LinkedIn
+							</p>
+						</Link>
+					</div>
+				</div>
+			))}
 		</div>
 	);
 };
 
 const LinkBlock = (linkBlock: Block['linkBlock']) => {
-	const [showBlock, setShowBlock] = useState(false);
 	const linksArray = Object.values(linkBlock || {});
 
 	return (
-		<div className='flex h-full w-full flex-col'>
-			<button
-				className={`select-button h-16 w-full items-center justify-center rounded-2xl
-			${showBlock ? 'select-button-active rounded-b-none' : 'select-button-hover'}`}
-				onClick={() => setShowBlock(!showBlock)}
-			>
-				<span className='flex flex-row items-center justify-between space-x-2 px-4'>
-					<p className='text-lg font-normal tracking-wide lg:text-xl'>
-						Links
-					</p>
-					{showBlock ? (
-						<ChevronDown className='h-5 w-5' />
-					) : (
-						<ChevronUp className='h-5 w-5' />
-					)}
-				</span>
-			</button>
-			{showBlock && (
-				<motion.div
-					className='flex h-full w-full transform flex-col space-y-4 divide-y-2 divide-bgAccentLight
-					rounded-2xl rounded-t-none border-t-2 border-dotted
-					border-bgAccentLight border-b-bgAccentLight bg-bgAccentDark p-4 text-bgAccentLight shadow-md
-					dark:divide-bgAccentDark dark:border-bgAccentDark dark:border-b-bgAccentDark dark:bg-bgAccentLight
-					dark:text-bgAccentDark dark:shadow-none'
-					initial={{ opacity: 0, y: -50 }}
-					animate={{
-						opacity: 1,
-						y: 0,
-						transition: {
-							ease: 'easeInOut',
-							duration: 0.6,
-							type: 'spring',
-							stiffness: 300,
-							damping: 40,
-							opacity: {
-								delay: 0.125,
-								duration: 0.25,
-							},
-						},
-					}}
+		<div className='divide-y-[1px]'>
+			{linksArray?.map((link, i) => (
+				<div
+					className='flex h-full w-full flex-col space-y-3 py-4'
+					key={i}
 				>
-					{linksArray?.map((link, i) => (
-						<div
-							className='flex h-full w-full flex-col space-y-2 p-4'
-							key={i}
+					<h1 className='w-full truncate text-lg font-semibold tracking-tight'>
+						{link?.name}
+					</h1>
+					<p className='w-full truncate text-sm font-light tracking-tight'>
+						{link?.description}
+					</p>
+					<div className='flex flex-row items-center space-x-6'>
+						<Link
+							href={`${link?.link}`}
+							className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
+							target='_blank'
 						>
-							<div className='flex w-full flex-row items-center justify-between'>
-								<h1 className='text-md truncate pr-8 font-semibold tracking-tight lg:text-lg'>
-									{link?.name}
-								</h1>
-								{link?.link && (
-									<Link
-										href={`${link?.link}`}
-										target='_blank'
-										className='text-bgAccentLight dark:text-bgAccentDark'
-									>
-										<LinkIcon className='h-4 w-4' />
-									</Link>
-								)}
-							</div>
-						</div>
-					))}
-				</motion.div>
-			)}
+							<LinkIcon className='h-4 w-4' />
+							<p className='hidden text-sm tracking-wider lg:inline-flex'>
+								Link
+							</p>
+						</Link>
+					</div>
+				</div>
+			))}
 		</div>
 	);
 };

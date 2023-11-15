@@ -3,7 +3,7 @@
 import React, { ReactNode } from 'react';
 import '../styles/globals.css';
 import { Poppins } from 'next/font/google';
-
+import { ThemeProvider } from '@/components/theme-provider';
 import { Analytics } from '@vercel/analytics/react';
 
 const poppins = Poppins({
@@ -14,7 +14,7 @@ const poppins = Poppins({
 
 export const metadata = {
 	title: 'QwkCV',
-	description: 'Easily create a digital CV in seconds',
+	description: 'Easily create a digital CV in seconds.',
 	meta: {
 		viewport: 'width=device-width, initial-scale=1',
 		charset: 'utf-8',
@@ -27,7 +27,7 @@ export default async function RootLayout({
 	children: ReactNode;
 }) {
 	return (
-		<html lang='en'>
+		<html lang='en' suppressHydrationWarning>
 			<head>
 				{process.env.NODE_ENV === 'production' && (
 					<>
@@ -36,10 +36,16 @@ export default async function RootLayout({
 				)}
 			</head>
 			<body
-				className={`${poppins.className} h-[calc(100dvh)]
-				w-full bg-bgAccentLight text-bgAccentDark dark:bg-bgAccentDark dark:text-bgAccentLight`}
+				className={`${poppins.className} bg-background text-foreground h-[calc(100dvh)] w-full antialiased`}
 			>
-				{children}
+				<ThemeProvider
+					attribute='class'
+					defaultTheme='system'
+					enableSystem
+					disableTransitionOnChange
+				>
+					{children}
+				</ThemeProvider>
 			</body>
 		</html>
 	);

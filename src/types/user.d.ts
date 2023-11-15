@@ -19,9 +19,10 @@ type UserFormInput = {
 type Block = {
 	linkBlock?: {
 		name: string;
+		description: string;
 		link: string;
 		itemPosition: int;
-	}[];
+	}[]?;
 	referenceBlock?: {
 		name: string;
 		linkedin: string;
@@ -29,7 +30,7 @@ type Block = {
 		link?: string;
 		company: string;
 		itemPosition: int;
-	}[];
+	}[]?;
 };
 
 export type { UserFormInput, Block };
