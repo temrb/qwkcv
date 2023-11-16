@@ -18,7 +18,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 	try {
 		return NextResponse.json({
 			status: 200,
-			data: url,
+			link: url,
 		});
 	} catch (error: any) {
 		return NextResponse.json({
