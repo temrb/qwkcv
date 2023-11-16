@@ -24,7 +24,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 			'Content-Type': 'application/json',
 		},
 		body:
-			'{"domain":"qwkcv.com","url" : "' +
+			'{"domain":"temsrecs.com","url" : "' +
 			url +
 			'","expiresAt":' +
 			expirationDate +
