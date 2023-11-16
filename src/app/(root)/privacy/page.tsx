@@ -12,11 +12,9 @@ const Page = () => {
 				</p>
 				<p className='mb-4'>
 					The tool operates on a unique principle where all CV-related
-					data is stored in the URL&apos;s query parameter. This means
-					that your data is not stored on our servers, and no
-					personally identifiable information is collected from users.
-					You can reload your data by simply copying and pasting the
-					URL back into qwkcv.
+					data is stored in the URL&apos;s query parameter. You can
+					reload your data by simply copying and pasting the URL back
+					into qwkcv.
 				</p>
 				<p className='mb-4'>
 					Please note that on the CV creation page (qwkcv.com), we may
@@ -24,6 +22,24 @@ const Page = () => {
 					keep them free of charge. However, we do not display ads on
 					the CV pages themselves (qwkcv.com/cv/*).
 				</p>
+
+				{/* Add information about dub.sh link shortening */}
+				<p className='mb-4'>
+					We also use dub.sh for link shortening. Please be aware that
+					any shortened dub links created on qwkcv will automatically
+					expire after 10 minutes. You can review the dub.sh privacy
+					policy for more information on their data handling practices{' '}
+					<a
+						className='text-blue-500 hover:underline'
+						href='https://dub.co/privacy'
+						target='_blank'
+						rel='noopener noreferrer'
+					>
+						here
+					</a>
+					.
+				</p>
+
 				<p>
 					If you have any questions or concerns about our privacy
 					policy, please feel free to contact us through our contact
