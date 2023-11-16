@@ -3,50 +3,54 @@ import base64url from 'base64url';
 import { UserFormInput } from '@/types/user';
 
 export async function POST(request: NextRequest, response: NextResponse) {
-	const body = await request.json();
-	const data = {
-		...body,
-	} as UserFormInput;
-	const encodedLink = base64url.encode(JSON.stringify(data));
-
-	const url = `${
-		process.env.NODE_ENV === 'development'
-			? 'http://localhost:4242'
-			: 'https://qwkcv.com'
-	}/cv/${encodedLink}`;
-
-	const expirationDate = new Date(600000).getTime(); /* 10 minutes from now */
-
-	const options = {
-		method: 'POST',
-		headers: {
-			Authorization: 'Bearer ' + process.env.DUB_API_KEY,
-			'Content-Type': 'application/json',
-		},
-		body:
-			'{"domain":"temsrecs.com","url" : "' +
-			url +
-			'","expiresAt":' +
-			expirationDate +
-			'}',
-	};
-
 	try {
+		const body = await request.json();
+		const data = { ...body } as UserFormInput;
+		const encodedLink = base64url.encode(JSON.stringify(data));
+
+		const url = `${
+			process.env.NODE_ENV === 'development'
+				? 'http://localhost:4242'
+				: 'https://qwkcv.com'
+		}/cv/${encodedLink}`;
+
+		const domain = 'temsrecs.com';
+
+		const currentDate = new Date();
+		const expirationDate = new Date(currentDate.getTime() + 10 * 60 * 1000);
+		const expirationTimestamp =
+			expirationDate.toISOString().slice(0, -5) + 'Z';
+
+		const options = {
+			method: 'POST',
+			headers: {
+				Authorization: 'Bearer ' + process.env.DUB_KEY,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				domain: domain,
+				url: url,
+				expiresAt: expirationTimestamp,
+			}),
+		};
+
 		const apiResponse = await fetch(
-			'https://api.dub.co/links?projectSlug=qwkcv',
+			`https://api.dub.co/links?projectSlug=${process.env.DUB_SLUG}`,
 			options,
 		);
 
 		if (!apiResponse.ok) {
+			const responseText = await apiResponse.text();
 			return NextResponse.json({
 				status: apiResponse.status,
-				data: await apiResponse.text(),
+				data: responseText,
 			});
 		}
+
 		const responseData = await apiResponse.json();
 
 		if ('key' in responseData) {
-			const dubLink = `https://qwkcv.com/${responseData.key}`;
+			const dubLink = `https://temsrecs.com/${responseData.key}`;
 
 			return NextResponse.json({
 				status: 200,
