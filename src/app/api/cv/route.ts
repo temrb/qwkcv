@@ -32,18 +32,32 @@ export async function POST(request: NextRequest, response: NextResponse) {
 	};
 
 	try {
-		const response = await fetch(
+		const apiResponse = await fetch(
 			'https://api.dub.co/links?projectSlug=qwkcv',
 			options,
-		)
-			.then((response) => response.json())
-			.then((response) => console.log(response))
-			.catch((err) => console.error(err));
+		);
 
-		return NextResponse.json({
-			status: 200,
-			link: response,
-		});
+		if (!apiResponse.ok) {
+			return NextResponse.json({
+				status: apiResponse.status,
+				data: await apiResponse.text(),
+			});
+		}
+		const responseData = await apiResponse.json();
+
+		if ('key' in responseData) {
+			const dubLink = `https://qwkcv.com/${responseData.key}`;
+
+			return NextResponse.json({
+				status: 200,
+				link: dubLink,
+			});
+		} else {
+			return NextResponse.json({
+				status: 500,
+				data: 'Response does not contain a key property',
+			});
+		}
 	} catch (error: any) {
 		return NextResponse.json({
 			status: 500,
