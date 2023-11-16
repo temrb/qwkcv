@@ -7,12 +7,18 @@ export async function POST(request: NextRequest, response: NextResponse) {
 	const data = {
 		...body,
 	} as UserFormInput;
+	const encodedLink = base64url.encode(JSON.stringify(data));
 
-	const encodedData = base64url.encode(JSON.stringify(data));
+	const url = `${
+		process.env.NODE_ENV === 'development'
+			? 'http://localhost:4242'
+			: 'https://qwkcv.com'
+	}/cv/${encodedLink}`;
+
 	try {
 		return NextResponse.json({
 			status: 200,
-			data: encodedData,
+			data: url,
 		});
 	} catch (error: any) {
 		return NextResponse.json({
