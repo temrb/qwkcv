@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 import '../styles/globals.css';
 import { Poppins } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
-import { Analytics } from '@vercel/analytics/react';
+// import { Analytics } from '@vercel/analytics/react';
 
 const poppins = Poppins({
 	subsets: ['latin'],
@@ -29,14 +29,14 @@ export default async function RootLayout({
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<head>
-				{process.env.NODE_ENV === 'production' && (
+				{/* {process.env.NODE_ENV === 'production' && (
 					<>
 						<Analytics />
 					</>
-				)}
+				)} */}
 			</head>
 			<body
-				className={`${poppins.className} bg-background text-foreground h-[calc(100dvh)] w-full antialiased`}
+				className={`${poppins.className} h-[calc(100dvh)] w-full bg-background text-foreground antialiased`}
 			>
 				<ThemeProvider
 					attribute='class'
