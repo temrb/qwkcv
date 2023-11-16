@@ -104,7 +104,7 @@ const Page = ({ params }: Props) => {
 					)}
 
 					<div className='flex h-full w-full flex-col space-y-6 pb-6 pt-2'>
-						<div className='border-foreground/20 flex w-full flex-row space-x-6 border-t-[1px] pt-4'>
+						<div className='flex w-full flex-row space-x-6 border-t-[1px] border-foreground/20 pt-4'>
 							{jsonData?.email && (
 								<Link
 									href={`mailto:${jsonData?.email}`}
@@ -179,7 +179,7 @@ const Page = ({ params }: Props) => {
 						</div>
 
 						<Accordion type='single' collapsible>
-							{jsonData?.block?.referenceBlock?.length !== 0 && (
+							{jsonData?.block?.referenceBlock && (
 								<AccordionItem value='item-1'>
 									<AccordionTrigger>
 										References
@@ -193,7 +193,7 @@ const Page = ({ params }: Props) => {
 									</AccordionContent>
 								</AccordionItem>
 							)}
-							{jsonData?.block?.linkBlock?.length !== 0 && (
+							{jsonData?.block?.linkBlock && (
 								<AccordionItem value='item-2'>
 									<AccordionTrigger>Links</AccordionTrigger>
 									<AccordionContent>
@@ -259,7 +259,7 @@ const Page = ({ params }: Props) => {
 						)}
 					</div>
 				</div>
-				<div className='bg-background bottom-0 flex h-14 w-full items-center justify-end'>
+				<div className='bottom-0 flex h-14 w-full items-center justify-end bg-background'>
 					<Link
 						className='w-fit underline-offset-4 hover:underline'
 						href='/'
