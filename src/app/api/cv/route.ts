@@ -28,10 +28,12 @@ export async function POST(request: NextRequest, response: NextResponse) {
 				'Content-Type': 'application/json',
 				Authorization: headers.get('Authorization') || '',
 			},
-			body: `{"domain":"${domain}","url":"${url}","expiresAt":"${expirationTimestamp}"}`,
+			body: JSON.stringify({
+				domain: domain,
+				url: url,
+				expiresAt: expirationTimestamp,
+			}),
 		};
-
-		console.log('🚀 ~ file: route.ts:37 ~ POST ~ options:', options);
 
 		const apiResponse = await fetch(
 			`https://api.dub.co/links?projectSlug=${process.env.DUB_SLUG}`,
