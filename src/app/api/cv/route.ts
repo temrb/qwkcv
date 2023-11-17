@@ -15,7 +15,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 				: 'https://qwkcv.com'
 		}/cv/${encodedLink}`;
 
-		const domain = 'temsrecs.com';
+		const domain = 'links.qwkcv.com';
 
 		const currentDate = new Date();
 		const expirationDate = new Date(currentDate.getTime() + 10 * 60 * 1000); // 10 minutes from now
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 		const responseData = await apiResponse.json();
 
 		if ('key' in responseData) {
-			const dubLink = `https://temsrecs.com/${responseData.key}`;
+			const dubLink = `https://${domain}/${responseData.key}`;
 
 			return NextResponse.json({
 				status: 200,
