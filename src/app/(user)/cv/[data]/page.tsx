@@ -53,7 +53,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const Page = ({ params }: Props) => {
 	const data = params.data;
 	const jsonData = decodeData(data);
-	console.log('🚀 ~ file: page.tsx:56 ~ Page ~ jsonData:', jsonData);
 
 	function getVimeoVideoId(vimeoURL: string): string | null {
 		const regex = /(?:vimeo\.com\/(?:video\/)?)?(\d+)/;
