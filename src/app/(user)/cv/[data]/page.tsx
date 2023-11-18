@@ -181,7 +181,7 @@ const Page = ({ params }: Props) => {
 						</div>
 
 						<Accordion type='single' collapsible>
-							{jsonData?.block?.referenceBlock && (
+							{jsonData?.block?.referenceBlock?.length !== 0 && (
 								<AccordionItem value='item-1'>
 									<AccordionTrigger>
 										References
@@ -195,7 +195,7 @@ const Page = ({ params }: Props) => {
 									</AccordionContent>
 								</AccordionItem>
 							)}
-							{jsonData?.block?.linkBlock && (
+							{jsonData?.block?.linkBlock?.length !== 0 && (
 								<AccordionItem value='item-2'>
 									<AccordionTrigger>Links</AccordionTrigger>
 									<AccordionContent>
