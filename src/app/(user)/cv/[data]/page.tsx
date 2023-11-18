@@ -91,9 +91,11 @@ const Page = ({ params }: Props) => {
 							<h1 className='w-full truncate text-2xl font-semibold tracking-tighter lg:text-3xl'>
 								{jsonData?.name}
 							</h1>
-							<p className='flex w-full items-center truncate text-xs tracking-tight lg:text-sm'>
-								📍{jsonData?.location}
-							</p>
+							{jsonData?.location && (
+								<p className='flex w-full items-center truncate text-xs tracking-tight lg:text-sm'>
+									📍{jsonData?.location}
+								</p>
+							)}
 						</div>
 					</div>
 
@@ -179,7 +181,7 @@ const Page = ({ params }: Props) => {
 						</div>
 
 						<Accordion type='single' collapsible>
-							{jsonData?.block?.referenceBlock?.length !== 0 && (
+							{jsonData?.block?.referenceBlock && (
 								<AccordionItem value='item-1'>
 									<AccordionTrigger>
 										References
@@ -193,7 +195,7 @@ const Page = ({ params }: Props) => {
 									</AccordionContent>
 								</AccordionItem>
 							)}
-							{jsonData?.block?.linkBlock?.length !== 0 && (
+							{jsonData?.block?.linkBlock && (
 								<AccordionItem value='item-2'>
 									<AccordionTrigger>Links</AccordionTrigger>
 									<AccordionContent>

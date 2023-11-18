@@ -21,7 +21,7 @@ type Block = {
 		name: string;
 		description: string;
 		link: string;
-		itemPosition: int;
+		itemPosition: number;
 	}[]?;
 	referenceBlock?: {
 		name: string;
@@ -29,7 +29,7 @@ type Block = {
 		relationship: string;
 		link?: string;
 		company: string;
-		itemPosition: int;
+		itemPosition: number;
 	}[]?;
 };
 
