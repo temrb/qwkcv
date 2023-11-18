@@ -2,25 +2,30 @@ import { NextResponse, NextRequest } from 'next/server';
 import base64url from 'base64url';
 import { UserFormInput } from '@/types/user';
 
+async function createShortenedLink(data: UserFormInput) {
+	const encodedLink = base64url.encode(JSON.stringify(data));
+	const domain = 'links.qwkcv.com';
+	const currentDate = new Date();
+	const expirationDate = new Date(currentDate.getTime() + 10 * 60 * 1000); // 10 minutes from now
+	const expirationTimestamp = expirationDate.toISOString().slice(0, -5) + 'Z';
+	const url =
+		process.env.NODE_ENV === 'development'
+			? `http://localhost:4242/cv/${encodedLink}`
+			: `https://qwkcv.com/cv/${encodedLink}`;
+
+	return {
+		domain,
+		url,
+		expiresAt: expirationTimestamp,
+	};
+}
+
 export async function POST(request: NextRequest, response: NextResponse) {
 	try {
 		const body = await request.json();
 		const headers = request.headers;
 		const data = { ...body } as UserFormInput;
-		const encodedLink = base64url.encode(JSON.stringify(data));
-
-		const url = `${
-			process.env.NODE_ENV === 'development'
-				? 'http://localhost:4242'
-				: 'https://qwkcv.com'
-		}/cv/${encodedLink}`;
-
-		const domain = 'links.qwkcv.com';
-
-		const currentDate = new Date();
-		const expirationDate = new Date(currentDate.getTime() + 10 * 60 * 1000); // 10 minutes from now
-		const expirationTimestamp =
-			expirationDate.toISOString().slice(0, -5) + 'Z';
+		const linkData = await createShortenedLink(data);
 
 		const options = {
 			method: 'POST',
@@ -28,11 +33,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 				'Content-Type': 'application/json',
 				Authorization: headers.get('Authorization') || '',
 			},
-			body: JSON.stringify({
-				domain: domain,
-				url: url,
-				expiresAt: expirationTimestamp,
-			}),
+			body: JSON.stringify(linkData),
 		};
 
 		const apiResponse = await fetch(
@@ -40,18 +41,17 @@ export async function POST(request: NextRequest, response: NextResponse) {
 			options as RequestInit,
 		);
 
+		const responseData = await apiResponse.json();
+
 		if (!apiResponse.ok) {
-			const responseText = await apiResponse.text();
 			return NextResponse.json({
 				status: apiResponse.status,
-				data: responseText,
+				data: responseData,
 			});
 		}
 
-		const responseData = await apiResponse.json();
-
 		if ('key' in responseData) {
-			const dubLink = `https://${domain}/${responseData.key}`;
+			const dubLink = `https://links.qwkcv.com/${responseData.key}`;
 
 			return NextResponse.json({
 				status: 200,
