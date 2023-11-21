@@ -63,27 +63,29 @@ const LinkBlock = (linkBlock: Block['linkBlock']) => {
 					className='flex h-full w-full flex-col space-y-3 py-4'
 					key={i}
 				>
-					<h1 className='w-full truncate text-lg font-semibold tracking-tight'>
-						{link?.name}
-					</h1>
+					<div className='flex flex-row items-center justify-between'>
+						<h1 className='w-full truncate text-lg font-semibold tracking-tight'>
+							{link?.name}
+						</h1>
+						{link?.link && (
+							<div className='flex flex-row items-center space-x-6'>
+								<Link
+									href={`${link?.link}`}
+									className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
+									target='_blank'
+								>
+									<LinkIcon className='h-4 w-4' />
+									<p className='hidden text-sm tracking-wider lg:inline-flex'>
+										Link
+									</p>
+								</Link>
+							</div>
+						)}
+					</div>
 					{link?.description && (
-						<p className='w-full truncate text-sm font-light tracking-tight'>
+						<p className='line-clamp-2 h-10 w-full overflow-x-hidden overflow-y-scroll pt-2 text-xs font-light normal-case tracking-widest'>
 							{link?.description}
 						</p>
-					)}
-					{link?.link && (
-						<div className='flex flex-row items-center space-x-6'>
-							<Link
-								href={`${link?.link}`}
-								className='flex w-fit flex-row items-center space-x-1 decoration-2 hover:underline'
-								target='_blank'
-							>
-								<LinkIcon className='h-4 w-4' />
-								<p className='hidden text-sm tracking-wider lg:inline-flex'>
-									Link
-								</p>
-							</Link>
-						</div>
 					)}
 				</div>
 			))}
