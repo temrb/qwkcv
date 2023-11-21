@@ -460,7 +460,7 @@ const Home = () => {
 
 					{/* references */}
 					<div className='space-y-2'>
-						<div className='border-foreground flex w-full flex-row items-center justify-center border-b-2 border-dotted p-2'>
+						<div className='flex w-full flex-row items-center justify-center border-b-2 border-dotted border-foreground p-2'>
 							<h1 className='text-lg font-semibold tracking-wider'>
 								References
 							</h1>
@@ -471,7 +471,7 @@ const Home = () => {
 									key={item.id}
 									className={`flex w-full space-x-4 ${
 										index !== 0 &&
-										'border-foreground/20 border-t-[1px] pt-6'
+										'border-t-[1px] border-foreground/20 pt-6'
 									}`}
 								>
 									<div className='grid w-full grid-cols-1 gap-4 lg:grid-cols-2'>
@@ -597,7 +597,7 @@ const Home = () => {
 										</div>
 									</div>
 									<div className='flex w-10 flex-col items-center justify-start space-y-4'>
-										<p className='bg-foreground/30 h-fit w-full items-center rounded-full p-2 text-center text-sm font-semibold'>
+										<p className='h-fit w-full items-center rounded-full bg-foreground/30 p-2 text-center text-sm font-semibold'>
 											{index + 1}
 										</p>
 
@@ -660,7 +660,7 @@ const Home = () => {
 
 					{/* links */}
 					<div className='space-y-2'>
-						<div className='border-foreground flex w-full flex-row items-center justify-center border-b-2 border-dotted p-2'>
+						<div className='flex w-full flex-row items-center justify-center border-b-2 border-dotted border-foreground p-2'>
 							<h1 className='text-lg font-semibold tracking-wider'>
 								Links
 							</h1>
@@ -671,7 +671,7 @@ const Home = () => {
 									key={item.id}
 									className={`flex w-full space-x-4 ${
 										index !== 0 &&
-										'border-foreground/20 border-t-[1px] pt-6'
+										'border-t-[1px] border-foreground/20 pt-6'
 									}`}
 								>
 									<div className='flex w-full flex-col'>
@@ -711,7 +711,7 @@ const Home = () => {
 													type='url'
 													placeholder='somelink.com'
 													{...register(
-														`block.referenceBlock.${index}.link`,
+														`block.linkBlock.${index}.link`,
 														{
 															required: false,
 															pattern: {
@@ -746,7 +746,7 @@ const Home = () => {
 										</div>
 									</div>
 									<div className='flex w-10 flex-col items-center justify-start space-y-4'>
-										<p className='bg-foreground/30 h-fit w-full items-center rounded-full p-2 text-center text-sm font-semibold'>
+										<p className='h-fit w-full items-center rounded-full bg-foreground/30 p-2 text-center text-sm font-semibold'>
 											{index + 1}
 										</p>
 
@@ -808,7 +808,7 @@ const Home = () => {
 
 					{/* assets */}
 					<div className='space-y-2'>
-						<div className='border-foreground flex w-full flex-row items-center justify-center border-b-2 border-dotted p-2'>
+						<div className='flex w-full flex-row items-center justify-center border-b-2 border-dotted border-foreground p-2'>
 							<h1 className='text-lg font-semibold tracking-wider'>
 								Assets
 							</h1>
@@ -873,7 +873,7 @@ const Home = () => {
 						</div>
 					</div>
 				</div>
-				<div className='bg-background border-foreground/20 sticky bottom-0 flex  h-16 w-full items-center justify-between border-t-2'>
+				<div className='sticky bottom-0 flex h-16 w-full  items-center justify-between border-t-2 border-foreground/20 bg-background'>
 					<Link
 						className='h-16 w-fit underline-offset-4 hover:underline'
 						href='https://dub.co/'
